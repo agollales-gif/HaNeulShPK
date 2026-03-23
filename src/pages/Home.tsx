@@ -1,4 +1,3 @@
-import { useInView } from 'framer-motion';
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -52,14 +51,18 @@ function Counter({ from, to }) {
 
 function HomeProductCard({ product, index }: { product: any, index: number; key?: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    if (isInView && !hasAnimated) {
-      setHasAnimated(true);
-    }
-  }, [isInView, hasAnimated]);
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setHasAnimated(true); observer.disconnect(); } },
+      { rootMargin: '-10%' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div
@@ -116,6 +119,7 @@ function HomeProductCard({ product, index }: { product: any, index: number; key?
           
           <Link 
             to={`/products/${product.id}`}
+            aria-label={`Shiko Detajet - ${product.name}`}
             className="inline-block border-b-2 border-red-600 pb-1 md:pb-2 font-bold uppercase tracking-[0.3em] text-[8px] md:text-xs hover:text-red-600 transition-all mt-4 md:mt-6"
           >
             Shiko Detajet
@@ -274,11 +278,11 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-12">
                 <div>
                   <div className="font-serif text-8xl text-[#1a2b4b] mb-2">2.8B</div>
-                  <span className="text-[10px] uppercase tracking-[0.4em] opacity-60">Shitje Ndërkombëtare / Vit</span>
+                  <span className="text-[10px] uppercase tracking-[0.4em] text-[#1a2b4b]/80">Shitje Ndërkombëtare / Vit</span>
                 </div>
                 <div>
                   <div className="font-serif text-8xl text-red-600 mb-2"><Counter from={0} to={12} /></div>
-                  <span className="text-[10px] uppercase tracking-[0.4em] opacity-60">Muaj Afatzgjatësi</span>
+                  <span className="text-[10px] uppercase tracking-[0.4em] text-[#1a2b4b]/80">Muaj Afatzgjatësi</span>
                 </div>
             </div>
           </div>

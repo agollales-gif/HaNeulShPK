@@ -198,7 +198,7 @@ export default function Home() {
           <div className="text-center mb-20 sm:mb-32">
             <span className="text-red-600 font-bold tracking-[0.5em] uppercase text-xs sm:text-sm mb-5 block">Destinacioni i Ri</span>
             <h2 className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] tracking-tighter leading-[0.9] mb-8">
-              Tani në <br /> <span className="text-red-600 italic font-extralight">Shqipëri.</span>
+              Tani në <span className="text-red-600 italic font-extralight">Shqipëri.</span>
             </h2>
             <div className="w-16 h-[1px] bg-red-600 mx-auto mb-8" />
             <p className="max-w-lg mx-auto text-sm sm:text-base md:text-lg text-white/70 font-light leading-relaxed">
@@ -218,7 +218,7 @@ export default function Home() {
 
                 const CardContent = ({ align }: { align: 'left' | 'right' }) => (
                   <div className={`py-8 opacity-50 group-hover:opacity-100 transition-all duration-500 ${align === 'right' ? 'text-right' : 'text-left'}`}>
-                    <span className="font-serif text-4xl sm:text-5xl text-red-600/40 block leading-none mb-2">{item.id}</span>
+                    <span className="font-serif text-4xl sm:text-5xl text-red-600 block leading-none mb-2">{item.id}</span>
                     <h3 className="font-serif text-xl sm:text-2xl md:text-3xl mb-2 group-hover:text-red-400 transition-colors duration-500">{item.title}</h3>
                     <p className="text-white/60 text-xs sm:text-sm font-light leading-relaxed">{item.desc}</p>
                   </div>

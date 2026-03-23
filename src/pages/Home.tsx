@@ -112,7 +112,7 @@ function HomeProductCard({ product, index }: { product: any, index: number; key?
             </span>
           </div>
           
-          <h2 className="font-serif text-2xl md:text-3xl lg:text-5xl tracking-tighter text-[#1a2b4b] leading-tight">{product.name}</h2>
+          <h3 className="font-serif text-2xl md:text-3xl lg:text-5xl tracking-tighter text-[#1a2b4b] leading-tight">{product.name}</h3>
           
           <Link 
             to={`/products/${product.id}`}
@@ -170,13 +170,16 @@ function HeroBackgroundVideo() {
         playsInline
         poster="/hero.png"
         preload="none"
+        aria-label="Video dekorative e sfondit"
         className={`absolute inset-0 w-full h-full object-cover -z-10 transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         style={{ 
           willChange: 'transform, opacity',
           contain: 'layout style paint',
           backfaceVisibility: 'hidden' as any
         }}
-      />
+      >
+        <track kind="captions" srcLang="sq" label="Shqip" default />
+      </video>
     </>
   );
 }
@@ -233,7 +236,7 @@ export default function Home() {
               <h2 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-[10rem] tracking-tighter leading-none mb-6 sm:mb-8">
                 Tani në <br /> <span className="text-red-600 italic">Shqipëri.</span>
               </h2>
-              <p className="max-w-2xl text-base sm:text-lg md:text-xl text-white/60 font-light leading-relaxed">
+              <p className="max-w-2xl text-base sm:text-lg md:text-xl text-white/80 font-light leading-relaxed">
                 Pas një suksesi të jashtëzakonshëm në tregjet botërore, HaNeul sjell zyrtarisht 
                 standardin më të lartë të produkteve koreane për konsumatorin shqiptar.
               </p>
@@ -255,11 +258,11 @@ export default function Home() {
                   key={item.id}
                   className={`relative flex items-center justify-between w-full transition-all duration-400 ${index % 2 === 0 ? "flex-row-reverse" : "flex-row"}`}
                 >
-                  <div className="w-full md:w-[42%] pl-12 md:pl-0 pr-0 md:pr-0 opacity-40 hover:opacity-100 transition-opacity duration-500">
+                  <div className="w-full md:w-[42%] pl-12 md:pl-0 pr-0 md:pr-0 opacity-60 hover:opacity-100 transition-opacity duration-500">
                     <div className={index % 2 === 0 ? "text-right" : "text-left"}>
                       <span className="font-serif text-4xl block mb-2 text-white/20">{item.id}</span>
                       <h3 className="font-serif text-3xl mb-3">{item.title}</h3>
-                      <p className="text-white/40 text-base font-light">{item.desc}</p>
+                      <p className="text-white/70 text-base font-light">{item.desc}</p>
                     </div>
                   </div>
                   <div className="absolute left-1/2 w-8 h-8 bg-[#1a2b4b] border border-white/20 rounded-full -translate-x-1/2 z-10 flex items-center justify-center">
@@ -300,16 +303,16 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
             <div>
               <h2 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tighter mb-6 sm:mb-8 text-red-600">Lider Global.</h2>
-              <p className="text-base sm:text-lg md:text-xl opacity-60 font-light leading-relaxed">Ekskluzivitet i garantuar dhe cilësi e certifikuar për tregun shqiptar.</p>
+              <p className="text-base sm:text-lg md:text-xl opacity-80 font-light leading-relaxed">Ekskluzivitet i garantuar dhe cilësi e certifikuar për tregun shqiptar.</p>
             </div>
             <div className="grid grid-cols-2 gap-12">
                 <div>
                   <div className="font-serif text-8xl text-[#1a2b4b] mb-2">2.8B</div>
-                  <span className="text-[10px] uppercase tracking-[0.4em] opacity-40">Shitje Ndërkombëtare / Vit</span>
+                  <span className="text-[10px] uppercase tracking-[0.4em] opacity-60">Shitje Ndërkombëtare / Vit</span>
                 </div>
                 <div>
                   <div className="font-serif text-8xl text-red-600 mb-2"><Counter from={0} to={12} /></div>
-                  <span className="text-[10px] uppercase tracking-[0.4em] opacity-40">Muaj Afatzgjatësi</span>
+                  <span className="text-[10px] uppercase tracking-[0.4em] opacity-60">Muaj Afatzgjatësi</span>
                 </div>
             </div>
           </div>

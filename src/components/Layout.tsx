@@ -209,7 +209,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           </div>
 
           <div className="md:w-1/3 flex flex-col gap-3 md:gap-4 font-sans text-xs md:text-sm text-[#1a2b4b] opacity-70">
-            <h4 className="uppercase tracking-[0.2em] text-[#1a2b4b] opacity-50 mb-2 text-[10px] md:text-xs">Kontakti</h4>
+            <h4 className="uppercase tracking-[0.2em] text-[#1a2b4b] opacity-70 mb-2 text-[10px] md:text-xs">Kontakti</h4>
             <p>📍 Rruga e Dritës, Ndërtesa 4, Tiranë, Shqipëri</p>
             <p>📞 +44 7464 729114</p>
             <p>✉️ info@haneul.com</p>

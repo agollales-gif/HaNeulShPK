@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ha-neul-sh-pk.vercel.app/sitemap.xml

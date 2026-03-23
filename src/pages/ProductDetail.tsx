@@ -122,7 +122,7 @@ export default function ProductDetail() {
             </div>
             
             <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-tighter text-[#1a2b4b]">{product.name}</h1>
-            <h2 className="font-sans text-sm md:text-lg uppercase tracking-widest opacity-40 italic">{product.subtitle}</h2>
+            <p className="font-sans text-sm md:text-lg uppercase tracking-widest opacity-60 italic">{product.subtitle}</p>
             
             <p className="font-sans text-base md:text-xl opacity-70 leading-relaxed max-w-lg">
               {product.desc}

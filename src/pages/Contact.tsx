@@ -58,9 +58,9 @@ export default function Contact() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h4 className="text-red-600 font-sans font-bold tracking-[0.4em] uppercase text-xs mb-6">
+            <p className="text-red-600 font-sans font-bold tracking-[0.4em] uppercase text-xs mb-6">
               HaNeul Heritage
-            </h4>
+            </p>
             <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tighter text-[#1a2b4b] mb-8 md:mb-12">
               NA <br/>
               <span className="text-red-600 italic font-extralight ml-[-5px]">GJENI</span>
@@ -69,11 +69,11 @@ export default function Contact() {
             <div className="space-y-12 md:space-y-16 mt-12 md:mt-20">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div>
-                  <h4 className="font-sans text-[10px] uppercase tracking-[0.3em] opacity-40 mb-4">Inquiry Center</h4>
+                  <p className="font-sans text-[10px] uppercase tracking-[0.3em] opacity-70 mb-4">Inquiry Center</p>
                   <p className="font-serif text-lg md:text-xl hover:text-red-600 transition-colors">info@haneul.al</p>
                 </div>
                 <div>
-                  <h4 className="font-sans text-[10px] uppercase tracking-[0.3em] opacity-40 mb-4">Haneul Connect</h4>
+                  <p className="font-sans text-[10px] uppercase tracking-[0.3em] opacity-70 mb-4">Haneul Connect</p>
                   <p className="font-serif text-lg md:text-xl">+44 7464 729114</p>
                 </div>
               </div>

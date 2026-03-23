@@ -164,6 +164,8 @@ export default function Products() {
               className="flex justify-center lg:justify-end relative"
             >
               <div className="relative">
+              <picture>
+                <source srcSet="/hero.webp" type="image/webp" />
                 <img 
                   src="/hero.png" 
                   alt="Produktet HaNeul" 
@@ -173,6 +175,7 @@ export default function Products() {
                   width="576"
                   height="576"
                 />
+              </picture>
               </div>
             </motion.div>
           </div>

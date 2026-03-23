@@ -94,15 +94,18 @@ export default function About() {
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
               className="flex justify-center lg:justify-end"
             >
-              <img 
-                src="/hero.png" 
-                alt="HaNeul - Distributori Zyrtar Nongshim" 
-                className="w-full max-w-lg h-auto object-contain lg:max-w-xl"
-                fetchPriority="high"
-                loading="eager"
-                width="576"
-                height="576"
-              />
+              <picture>
+                <source srcSet="/hero.webp" type="image/webp" />
+                <img 
+                  src="/hero.png" 
+                  alt="HaNeul - Distributori Zyrtar Nongshim" 
+                  className="w-full max-w-lg h-auto object-contain lg:max-w-xl"
+                  fetchPriority="high"
+                  loading="eager"
+                  width="576"
+                  height="576"
+                />
+              </picture>
             </motion.div>
           </div>
         </div>

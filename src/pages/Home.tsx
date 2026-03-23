@@ -149,18 +149,27 @@ function HeroBackgroundVideo() {
 
   return (
     <>
-      {/* Static background image with explicit dimensions to prevent layout shift */}
+      {/* Static background: WebP with PNG fallback, fetchpriority=high for LCP */}
       <div 
         className="absolute inset-0 w-full h-full -z-10"
-        style={{ 
-          backgroundImage: 'url(/hero.png)', 
-          backgroundSize: 'cover', 
-          backgroundPosition: 'center',
-          backgroundColor: '#fdfaf5', // Fallback color
-          contain: 'layout style paint' // Prevent reflow
-        }}
-      />
-      {/* Video that loads later with proper sizing and containment */}
+        style={{ contain: 'layout style paint' }}
+      >
+        <picture>
+          <source srcSet="/hero.webp" type="image/webp" />
+          <img
+            src="/hero.png"
+            alt=""
+            aria-hidden="true"
+            fetchPriority="high"
+            loading="eager"
+            decoding="sync"
+            className="w-full h-full object-cover"
+            width="800"
+            height="600"
+          />
+        </picture>
+      </div>
+      {/* Video loads after 2s, fades in over the static image */}
       <video 
         ref={videoRef}
         src="/hero_video.mp4" 
@@ -168,14 +177,12 @@ function HeroBackgroundVideo() {
         muted
         loop
         playsInline
-        poster="/hero.png"
         preload="none"
-        aria-label="Video dekorative e sfondit"
+        aria-hidden="true"
         className={`absolute inset-0 w-full h-full object-cover -z-10 transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
         style={{ 
-          willChange: 'transform, opacity',
+          willChange: 'opacity',
           contain: 'layout style paint',
-          backfaceVisibility: 'hidden' as any
         }}
       >
         <track kind="captions" srcLang="sq" label="Shqip" default />

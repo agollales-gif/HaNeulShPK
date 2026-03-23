@@ -70,15 +70,18 @@ export default function Layout({ children }: { children: ReactNode }) {
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="relative z-[120] flex items-center gap-3">
-            <img 
-              src="/HaNeul_logo_sm.png" 
-              alt="HaNeul Logo" 
-              className="h-10 md:h-14 object-contain"
-              loading="eager"
-              decoding="async"
-              width="56"
-              height="56"
-            />
+            <picture>
+              <source srcSet="/HaNeul_logo_sm.webp" type="image/webp" />
+              <img 
+                src="/HaNeul_logo_sm.png" 
+                alt="HaNeul Logo" 
+                className="h-10 md:h-14 object-contain"
+                loading="eager"
+                decoding="async"
+                width="56"
+                height="56"
+              />
+            </picture>
             <span className="font-serif text-lg md:text-2xl font-bold tracking-tighter text-navy">
               하늘 <span className="text-crimson italic font-light">HaNeul</span>
             </span>
@@ -190,15 +193,18 @@ export default function Layout({ children }: { children: ReactNode }) {
         <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-12 flex flex-col md:flex-row justify-between items-start gap-8 md:gap-12">
           <div className="md:w-1/3">
             <div className="flex items-center gap-3 md:gap-4 mb-4">
-              <img 
-                src="/HaNeul_logo_lg.png" 
-                alt="HaNeul Logo" 
-                className="h-10 md:h-16 lg:h-24 object-contain"
-                loading="lazy"
-                decoding="async"
-                width="96"
-                height="96"
-              />
+              <picture>
+                <source srcSet="/HaNeul_logo_lg.webp" type="image/webp" />
+                <img 
+                  src="/HaNeul_logo_lg.png" 
+                  alt="HaNeul Logo" 
+                  className="h-10 md:h-16 lg:h-24 object-contain"
+                  loading="lazy"
+                  decoding="async"
+                  width="96"
+                  height="96"
+                />
+              </picture>
               <span className="font-serif text-2xl md:text-4xl lg:text-5xl font-bold tracking-tighter block text-[#1a2b4b]">
                 하늘 <span className="text-red-600 italic font-light">HaNeul</span>
               </span>

@@ -94,9 +94,11 @@ export default function Layout({ children }: { children: ReactNode }) {
                 <span className="font-sans text-xs uppercase tracking-[0.2em] font-medium opacity-70 group-hover:opacity-100 transition-opacity">
                   {link.label}
                 </span>
-                {location.pathname === link.path && (
-                  <motion.div layoutId="nav-indicator" className="absolute -bottom-2 left-0 right-0 h-px bg-crimson" />
-                )}
+                <span
+                  className={`absolute -bottom-2 left-0 right-0 h-px bg-crimson transition-transform duration-300 origin-left ${
+                    location.pathname === link.path ? 'scale-x-100' : 'scale-x-0'
+                  }`}
+                />
               </Link>
             ))}
           </div>

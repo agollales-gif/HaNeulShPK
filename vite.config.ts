@@ -2,30 +2,34 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig, loadEnv} from 'vite';
-import type { Plugin, HtmlTagDescriptor } from 'vite';
+import type { Plugin } from 'vite';
 
-// Injects <link rel="preload"> for CSS and <link rel="modulepreload"> for the
-// main JS entry into the built HTML so they download in parallel with the HTML
-// instead of being discovered only after the HTML is parsed.
-function preloadCriticalAssetsPlugin(): Plugin {
+// Inlines the main CSS bundle into a <style> tag and adds modulepreload for
+// the main JS entry — eliminates the render-blocking CSS request entirely.
+function inlineCriticalCssPlugin(): Plugin {
   return {
-    name: 'preload-critical-assets',
+    name: 'inline-critical-css',
     apply: 'build',
     transformIndexHtml: {
       order: 'post',
       handler(html, ctx) {
         if (!ctx.bundle) return html;
 
-        const tags: HtmlTagDescriptor[] = [];
+        let result = html;
 
         for (const [fileName, chunk] of Object.entries(ctx.bundle)) {
-          // Preload the main CSS bundle
-          if (fileName.startsWith('assets/index-') && fileName.endsWith('.css')) {
-            tags.push({
-              tag: 'link',
-              attrs: { rel: 'preload', href: `/${fileName}`, as: 'style' },
-              injectTo: 'head-prepend',
-            });
+          // Inline the main CSS bundle
+          if (
+            chunk.type === 'asset' &&
+            fileName.startsWith('assets/index-') &&
+            fileName.endsWith('.css')
+          ) {
+            const css = (chunk as any).source as string;
+            // Replace the <link rel="stylesheet"> with an inline <style>
+            result = result.replace(
+              new RegExp(`<link[^>]+href="[./]*${fileName.replace('.', '\\.')}[^"]*"[^>]*>`),
+              `<style>${css}</style>`
+            );
           }
           // Modulepreload the main JS entry chunk
           if (
@@ -34,15 +38,14 @@ function preloadCriticalAssetsPlugin(): Plugin {
             fileName.startsWith('assets/index-') &&
             fileName.endsWith('.js')
           ) {
-            tags.push({
-              tag: 'link',
-              attrs: { rel: 'modulepreload', href: `/${fileName}`, crossorigin: '' },
-              injectTo: 'head-prepend',
-            });
+            result = result.replace(
+              '</head>',
+              `<link rel="modulepreload" href="/${fileName}" crossorigin></head>`
+            );
           }
         }
 
-        return { html, tags };
+        return result;
       },
     },
   };
@@ -56,7 +59,7 @@ export default defineConfig(({mode}) => {
     plugins: [
       react(),
       tailwindcss(),
-      preloadCriticalAssetsPlugin(),
+      inlineCriticalCssPlugin(),
     ],
     define: {
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),

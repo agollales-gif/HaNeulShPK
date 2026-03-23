@@ -1,55 +1,37 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
-function Counter({ from, to }) {
+function Counter({ from, to }: { from: number; to: number }) {
   const [count, setCount] = useState(from);
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !isVisible) {
-            setIsVisible(true);
-          }
-        });
-      },
+      ([entry]) => { if (entry.isIntersecting && !isVisible) setIsVisible(true); },
       { threshold: 0.1 }
     );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
+    if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [isVisible]);
 
   useEffect(() => {
-    if (isVisible) {
-      const duration = 2000;
-      const steps = 30;
-      const increment = (to - from) / steps;
-      let current = from;
-      
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= to) {
-          setCount(to);
-          clearInterval(timer);
-        } else {
-          setCount(Math.floor(current));
-        }
-      }, duration / steps);
-
-      return () => clearInterval(timer);
-    }
+    if (!isVisible) return;
+    const steps = 30;
+    const increment = (to - from) / steps;
+    let current = from;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= to) { setCount(to); clearInterval(timer); }
+      else setCount(Math.floor(current));
+    }, 2000 / steps);
+    return () => clearInterval(timer);
   }, [from, to, isVisible]);
 
   return <span ref={ref}>{count}</span>;
 }
 
-function HomeProductCard({ product, index }: { product: any, index: number; key?: string }) {
+function HomeProductCard({ product, index }: { product: { name: string; detail: string; image: string; id: string }; index: number; key?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
 
@@ -58,7 +40,7 @@ function HomeProductCard({ product, index }: { product: any, index: number; key?
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) { setHasAnimated(true); observer.disconnect(); } },
-      { rootMargin: '-10%' }
+      { rootMargin: '-5%' }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -67,33 +49,23 @@ function HomeProductCard({ product, index }: { product: any, index: number; key?
   return (
     <div
       ref={ref}
-      className={`flex items-center gap-6 md:gap-10 py-12 md:py-16 border-b border-[#1a2b4b]/5 last:border-0 transition-all duration-400 ${hasAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+      className={`flex items-center gap-4 sm:gap-6 md:gap-10 py-10 md:py-16 border-b border-[#1a2b4b]/5 last:border-0 transition-all duration-500 ${hasAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      <div className="w-2/5 lg:w-1/2 flex justify-center">
-        <div className="relative w-full aspect-[4/5] flex items-center justify-center p-1">
-          <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-white to-red-50 rounded-lg opacity-60"></div>
-          <div className="absolute inset-0 border-2 border-red-600/20 rounded-lg"></div>
-          <div className="absolute inset-0 border border-red-600/10 rounded-md m-1"></div>
-          
-          <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-red-600 rounded-tl-lg"></div>
-          <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-red-600 rounded-tr-lg"></div>
-          <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-red-600 rounded-bl-lg"></div>
-          <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-red-600 rounded-br-lg"></div>
-          
-          <div className="absolute top-2 left-2 w-2 h-2 bg-red-600 rounded-full opacity-80"></div>
-          <div className="absolute top-2 right-2 w-2 h-2 bg-red-600 rounded-full opacity-80"></div>
-          <div className="absolute bottom-2 left-2 w-2 h-2 bg-red-600 rounded-full opacity-80"></div>
-          <div className="absolute bottom-2 right-2 w-2 h-2 bg-red-600 rounded-full opacity-80"></div>
-          
-          <div className="relative w-full h-full flex items-center justify-center p-2">
-            <div className="absolute top-2 right-2 text-[#1a2b4b]/5 font-serif text-xl md:text-3xl lg:text-4xl pointer-events-none">
-              辛
-            </div>
-            <img 
-              src={product.image} 
-              alt={product.name} 
-              className="h-full object-contain rounded shadow-[0_20px_40px_rgba(26,43,75,0.15)] border border-red-600/10 bg-white/50" 
+      {/* Image */}
+      <div className="w-2/5 sm:w-1/3 lg:w-1/2 flex justify-center shrink-0">
+        <div className="relative w-full aspect-[4/5] flex items-center justify-center">
+          <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-white to-red-50 rounded-lg" />
+          <div className="absolute inset-0 border-2 border-red-600/20 rounded-lg" />
+          <div className="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-red-600 rounded-tl-lg" />
+          <div className="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-red-600 rounded-tr-lg" />
+          <div className="absolute bottom-0 left-0 w-5 h-5 border-b-2 border-l-2 border-red-600 rounded-bl-lg" />
+          <div className="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-red-600 rounded-br-lg" />
+          <div className="relative w-full h-full flex items-center justify-center p-3">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="h-full object-contain rounded shadow-[0_10px_30px_rgba(26,43,75,0.12)] bg-white/50"
               loading="lazy"
               decoding="async"
               width="200"
@@ -103,36 +75,47 @@ function HomeProductCard({ product, index }: { product: any, index: number; key?
         </div>
       </div>
 
-      <div className="w-3/5 lg:w-1/2 flex items-center justify-center">
-        <div
-          className={`space-y-4 md:space-y-6 max-w-xs md:max-w-lg transition-all duration-400 ${hasAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-          style={{ transitionDelay: `${index * 100 + 100}ms` }}
-        >
-          <div className="flex items-center gap-2 md:gap-4">
-            <span className="h-[1px] w-6 md:w-8 lg:w-12 bg-red-600" />
-            <span className="font-sans text-[8px] md:text-xs uppercase tracking-[0.3em] text-red-600 font-bold">
-              {product.detail}
-            </span>
-          </div>
-          
-          <h3 className="font-serif text-2xl md:text-3xl lg:text-5xl tracking-tighter text-[#1a2b4b] leading-tight">{product.name}</h3>
-          
-          <Link 
-            to={`/products/${product.id}`}
-            aria-label={`Shiko Detajet - ${product.name}`}
-            className="inline-block border-b-2 border-red-600 pb-1 md:pb-2 font-bold uppercase tracking-[0.3em] text-[8px] md:text-xs hover:text-red-600 transition-all mt-4 md:mt-6"
-          >
-            Shiko Detajet
-          </Link>
+      {/* Text */}
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2 md:gap-3 mb-3">
+          <span className="h-[1px] w-5 md:w-8 bg-red-600 shrink-0" />
+          <span className="font-sans text-[9px] md:text-xs uppercase tracking-[0.25em] text-red-600 font-bold truncate">
+            {product.detail}
+          </span>
         </div>
+        <h3 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-5xl tracking-tighter text-[#1a2b4b] leading-tight mb-4 md:mb-6">
+          {product.name}
+        </h3>
+        <Link
+          to={`/products/${product.id}`}
+          aria-label={`Shiko Detajet - ${product.name}`}
+          className="inline-block border-b-2 border-red-600 pb-1 font-bold uppercase tracking-[0.25em] text-[9px] md:text-xs hover:text-red-600 transition-colors"
+        >
+          Shiko Detajet
+        </Link>
       </div>
     </div>
   );
 }
 
-function HeroBackgroundVideo() {
+function HeroVideo() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    // Play only after page is interactive to avoid blocking LCP
+    const play = () => v.play().catch(() => {});
+    if (document.readyState === 'complete') {
+      play();
+    } else {
+      window.addEventListener('load', play, { once: true });
+    }
+  }, []);
+
   return (
-    <div className="absolute inset-0 w-full h-full -z-10">
+    <div className="absolute inset-0 w-full h-full -z-10 overflow-hidden">
+      {/* Poster image shown immediately — also the LCP candidate */}
       <picture>
         <source srcSet="/hero.avif" type="image/avif" />
         <source srcSet="/hero.webp" type="image/webp" />
@@ -142,11 +125,22 @@ function HeroBackgroundVideo() {
           fetchPriority="high"
           loading="eager"
           decoding="sync"
-          className="w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
           width="560"
           height="315"
         />
       </picture>
+      {/* Video plays on top once loaded — muted/autoplay/playsInline required for mobile */}
+      <video
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full object-cover"
+        src="/hero_video.mp4"
+        muted
+        loop
+        playsInline
+        preload="none"
+        aria-hidden="true"
+      />
     </div>
   );
 }
@@ -163,79 +157,73 @@ export default function Home() {
 
   return (
     <div className="relative bg-[#fdfaf5] text-[#1a2b4b] selection:bg-red-600 selection:text-white">
-      
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden z-10 pt-24 lg:pt-32">
-        {/* Optimized Background Video */}
-        <HeroBackgroundVideo />
-        
-        {/* Overlay to ensure text readability */}
-        <div className="absolute inset-0 bg-[#fdfaf5]/80 -z-10" />
-        
-        <div className="px-6 max-w-7xl mx-auto w-full relative z-20">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7 text-left">
-              <span className="text-red-600 font-bold tracking-[0.4em] uppercase text-xs mb-6 block animate-fade-in">Distributori Zyrtar</span>
-              <h1 className="font-serif text-5xl sm:text-6xl md:text-8xl lg:text-9xl leading-[0.8] tracking-tighter mb-6 sm:mb-8 animate-fade-in">
-                Eleganca e <br /> <span className="italic font-extralight text-red-600">traditës</span> koreane.
-              </h1>
-              <p className="text-lg sm:text-xl text-[#1a2b4b]/80 mb-8 sm:mb-10 max-w-lg leading-relaxed font-light animate-fade-in">
-                HaNeul - Qielli Juaj i Shijes. Eksploroni gamën tonë të produkteve premium.
-              </p>
-              <Link 
-                to="/products"
-                className="bg-[#1a2b4b] text-white px-8 sm:px-12 py-4 sm:py-5 rounded-full font-bold shadow-2xl hover:bg-red-600 transition-all duration-500 uppercase text-xs tracking-widest inline-block animate-fade-in"
-              >
-                 Shiko Katalogun
-              </Link>
-            </div>
-            <div className="lg:col-span-5" />
+
+      {/* ── HERO ── */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden z-10 pt-20 lg:pt-32">
+        <HeroVideo />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-[#fdfaf5]/75 -z-10" />
+
+        <div className="px-5 sm:px-8 max-w-7xl mx-auto w-full relative z-20">
+          <div className="max-w-2xl">
+            <span className="text-red-600 font-bold tracking-[0.4em] uppercase text-[10px] sm:text-xs mb-4 sm:mb-6 block">
+              Distributori Zyrtar
+            </span>
+            <h1 className="font-serif text-4xl sm:text-6xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tighter mb-5 sm:mb-8">
+              Eleganca e <br />
+              <span className="italic font-extralight text-red-600">traditës</span> koreane.
+            </h1>
+            <p className="text-base sm:text-lg md:text-xl text-[#1a2b4b]/80 mb-7 sm:mb-10 max-w-md leading-relaxed font-light">
+              HaNeul - Qielli Juaj i Shijes. Eksploroni gamën tonë të produkteve premium.
+            </p>
+            <Link
+              to="/products"
+              className="bg-[#1a2b4b] text-white px-8 sm:px-12 py-4 sm:py-5 rounded-full font-bold shadow-2xl hover:bg-red-600 transition-all duration-500 uppercase text-[10px] sm:text-xs tracking-widest inline-block"
+            >
+              Shiko Katalogun
+            </Link>
           </div>
         </div>
       </section>
 
-      <section className="relative py-48 bg-[#1a2b4b] text-white z-10 overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-red-600/10 blur-[150px] rounded-full" />
-        
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col items-center text-center mb-32">
-            <div className="inline-block">
-              <span className="text-red-600 font-bold tracking-[0.5em] uppercase text-sm mb-4 block">Destinacioni i Ri</span>
-              <h2 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-[10rem] tracking-tighter leading-none mb-6 sm:mb-8">
-                Tani në <br /> <span className="text-red-600 italic">Shqipëri.</span>
-              </h2>
-              <p className="max-w-2xl text-base sm:text-lg md:text-xl text-white/80 font-light leading-relaxed">
-                Pas një suksesi të jashtëzakonshëm në tregjet botërore, HaNeul sjell zyrtarisht 
-                standardin më të lartë të produkteve koreane për konsumatorin shqiptar.
-              </p>
-            </div>
+      {/* ── TANI NË SHQIPËRI ── */}
+      <section className="relative py-24 sm:py-40 bg-[#1a2b4b] text-white z-10 overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-red-600/10 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+          <div className="text-center mb-16 sm:mb-24">
+            <span className="text-red-600 font-bold tracking-[0.5em] uppercase text-xs sm:text-sm mb-4 block">Destinacioni i Ri</span>
+            <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-[9rem] tracking-tighter leading-none mb-6">
+              Tani në <br /> <span className="text-red-600 italic">Shqipëri.</span>
+            </h2>
+            <p className="max-w-xl mx-auto text-sm sm:text-base md:text-lg text-white/80 font-light leading-relaxed">
+              Pas një suksesi të jashtëzakonshëm në tregjet botërore, HaNeul sjell zyrtarisht
+              standardin më të lartë të produkteve koreane për konsumatorin shqiptar.
+            </p>
           </div>
 
-          <div className="relative mt-20 px-6 sm:px-8 md:px-12">
-            <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-white/10 -translate-x-1/2" />
-            
-            <div className="space-y-24 sm:space-y-32">
-              <div className="relative flex items-center justify-center">
-                 <div className="absolute left-1/2 w-14 h-14 bg-red-600/20 border-2 border-red-600 rounded-full -translate-x-1/2 z-20 animate-pulse flex items-center justify-center">
-                    <div className="w-4 h-4 bg-red-600 rounded-full" />
-                 </div>
-              </div>
-
+          {/* Timeline — stacks on mobile */}
+          <div className="relative">
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-white/10 -translate-x-1/2" />
+            <div className="space-y-10 sm:space-y-16 md:space-y-24">
               {pastMarkets.map((item, index) => (
                 <div
                   key={item.id}
-                  className={`relative flex items-center justify-between w-full transition-all duration-400 ${index % 2 === 0 ? "flex-row-reverse" : "flex-row"}`}
+                  className={`relative flex items-start md:items-center gap-6 md:gap-0 md:justify-between w-full ${index % 2 === 0 ? 'md:flex-row-reverse' : 'md:flex-row'}`}
                 >
-                  <div className="w-full md:w-[42%] pl-12 md:pl-0 pr-0 md:pr-0 opacity-60 hover:opacity-100 transition-opacity duration-500">
-                    <div className={index % 2 === 0 ? "text-right" : "text-left"}>
-                      <span className="font-serif text-4xl block mb-2 text-white/40" aria-hidden="true">{item.id}</span>
-                      <h3 className="font-serif text-3xl mb-3">{item.title}</h3>
-                      <p className="text-white/70 text-base font-light">{item.desc}</p>
-                    </div>
+                  {/* Dot — only on md+ */}
+                  <div className="hidden md:flex absolute left-1/2 w-8 h-8 bg-[#1a2b4b] border border-white/20 rounded-full -translate-x-1/2 z-10 items-center justify-center">
+                    <div className="w-1.5 h-1.5 bg-white/30 rounded-full" />
                   </div>
-                  <div className="absolute left-1/2 w-8 h-8 bg-[#1a2b4b] border border-white/20 rounded-full -translate-x-1/2 z-10 flex items-center justify-center">
-                    <div className="w-1.5 h-1.5 bg-white/20 rounded-full" />
+                  {/* Mobile dot */}
+                  <div className="md:hidden w-3 h-3 mt-1.5 bg-red-600 rounded-full shrink-0" />
+
+                  <div className={`md:w-[42%] ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
+                    <span className="font-serif text-2xl sm:text-4xl block mb-1 text-white/30" aria-hidden="true">{item.id}</span>
+                    <h3 className="font-serif text-2xl sm:text-3xl mb-2">{item.title}</h3>
+                    <p className="text-white/70 text-sm sm:text-base font-light">{item.desc}</p>
                   </div>
-                  <div className="hidden md:block w-[42%]" />
+                  <div className="hidden md:block md:w-[42%]" />
                 </div>
               ))}
             </div>
@@ -243,60 +231,67 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-24 md:py-48 bg-transparent z-10 relative">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
-            <div className="flex flex-col items-center text-center mb-16 md:mb-24 gap-8">
-                <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-8xl tracking-tighter leading-none text-center">
-                  Gama <br /> <span className="text-red-600">Premium.</span>
-                </h2>
-                <Link to="/products" className="border-b-2 border-red-600 pb-2 font-bold uppercase tracking-[0.3em] text-xs hover:text-red-600 transition-all text-center">
-                  Eksploro të gjitha
-                </Link>
-            </div>
-            <div className="space-y-0">
-                {[
-                  { name: "Shin Ramyun Original", detail: "Supa ikonike pikante", image: "/shin_ramuyn/shin_ramuyn(2).jpeg", id: "shin-ramyun" },
-                  { name: "Shin Ramyun Toomba", detail: "Kremoze & Stir-fry", image: "/Shin_Ramun_tomba/Shin_Ramun_tomba.jpeg", id: "shin-toomba" },
-                  { name: "Shrimp Crackers", detail: "Shije Oqeani & Pikante", image: "/Sgin_Crackers/Sgin_Crackers.jpeg", id: "shrimp-crackers" }
-                ].map((item, i) => (
-                    <HomeProductCard product={item} index={i} key={item.id} />
-                ))}
-            </div>
+      {/* ── GAMA PREMIUM ── */}
+      <section className="py-16 sm:py-24 md:py-40 bg-transparent z-10 relative">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12">
+          <div className="flex flex-col items-center text-center mb-12 sm:mb-20 gap-5">
+            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-8xl tracking-tighter leading-none">
+              Gama <br /> <span className="text-red-600">Premium.</span>
+            </h2>
+            <Link to="/products" className="border-b-2 border-red-600 pb-1 font-bold uppercase tracking-[0.3em] text-xs hover:text-red-600 transition-colors">
+              Eksploro të gjitha
+            </Link>
+          </div>
+          <div>
+            {[
+              { name: "Shin Ramyun Original", detail: "Supa ikonike pikante", image: "/shin_ramuyn/shin_ramuyn(2).jpeg", id: "shin-ramyun" },
+              { name: "Shin Ramyun Toomba", detail: "Kremoze & Stir-fry", image: "/Shin_Ramun_tomba/Shin_Ramun_tomba.jpeg", id: "shin-toomba" },
+              { name: "Shrimp Crackers", detail: "Shije Oqeani & Pikante", image: "/Sgin_Crackers/Sgin_Crackers.jpeg", id: "shrimp-crackers" }
+            ].map((item, i) => (
+              <HomeProductCard product={item} index={i} key={item.id} />
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="py-48 bg-white/80 backdrop-blur-md z-10 relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+      {/* ── LIDER GLOBAL ── */}
+      <section className="py-20 sm:py-32 md:py-48 bg-white/80 backdrop-blur-md z-10 relative">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
             <div>
-              <h2 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tighter mb-6 sm:mb-8 text-red-600">Lider Global.</h2>
-              <p className="text-base sm:text-lg md:text-xl text-[#1a2b4b]/80 font-light leading-relaxed">Ekskluzivitet i garantuar dhe cilësi e certifikuar për tregun shqiptar.</p>
+              <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tighter mb-4 sm:mb-6 text-red-600">Lider Global.</h2>
+              <p className="text-base sm:text-lg md:text-xl text-[#1a2b4b]/80 font-light leading-relaxed">
+                Ekskluzivitet i garantuar dhe cilësi e certifikuar për tregun shqiptar.
+              </p>
             </div>
-            <div className="grid grid-cols-2 gap-12">
-                <div>
-                  <div className="font-serif text-8xl text-[#1a2b4b] mb-2">2.8B</div>
-                  <span className="text-[10px] uppercase tracking-[0.4em] text-[#1a2b4b]">Shitje Ndërkombëtare / Vit</span>
+            <div className="grid grid-cols-2 gap-8 sm:gap-12">
+              <div>
+                <div className="font-serif text-5xl sm:text-7xl md:text-8xl text-[#1a2b4b] mb-2">2.8B</div>
+                <span className="text-[10px] uppercase tracking-[0.3em] text-[#1a2b4b]">Shitje Ndërkombëtare / Vit</span>
+              </div>
+              <div>
+                <div className="font-serif text-5xl sm:text-7xl md:text-8xl text-red-600 mb-2">
+                  <Counter from={0} to={12} />
                 </div>
-                <div>
-                  <div className="font-serif text-8xl text-red-600 mb-2"><Counter from={0} to={12} /></div>
-                  <span className="text-[10px] uppercase tracking-[0.4em] text-[#1a2b4b]">Muaj Afatzgjatësi</span>
-                </div>
+                <span className="text-[10px] uppercase tracking-[0.3em] text-[#1a2b4b]">Muaj Afatzgjatësi</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-60 bg-[#1a2b4b] text-white text-center relative overflow-hidden z-10">
-        <div className="max-w-4xl mx-auto px-6 relative z-10">
-            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-9xl tracking-tighter mb-8 sm:mb-12">Gati për HaNeul?</h2>
-            <Link 
-                to="/contact"
-                className="bg-red-600 text-white px-12 sm:px-16 py-5 sm:py-7 rounded-full font-bold uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-red-600 transition-all duration-700 shadow-2xl"
-              >
-                Na Kontaktoni Sot
-              </Link>
+      {/* ── CTA ── */}
+      <section className="py-32 sm:py-48 bg-[#1a2b4b] text-white text-center relative overflow-hidden z-10">
+        <div className="max-w-4xl mx-auto px-5 sm:px-8 relative z-10">
+          <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-9xl tracking-tighter mb-8 sm:mb-12">Gati për HaNeul?</h2>
+          <Link
+            to="/contact"
+            className="bg-red-600 text-white px-10 sm:px-16 py-5 sm:py-7 rounded-full font-bold uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-red-600 transition-all duration-700 shadow-2xl inline-block"
+          >
+            Na Kontaktoni Sot
+          </Link>
         </div>
       </section>
     </div>
   );
-};
+}

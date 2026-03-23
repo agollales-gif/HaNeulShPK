@@ -132,17 +132,13 @@ function HomeProductCard({ product, index }: { product: any, index: number; key?
 
 function HeroBackgroundVideo() {
   return (
-    <div 
-      className="absolute inset-0 w-full h-full -z-10"
-      style={{ contain: 'layout style paint' }}
-    >
+    <div className="absolute inset-0 w-full h-full -z-10">
       <picture>
         <source srcSet="/hero.avif" type="image/avif" />
         <source srcSet="/hero.webp" type="image/webp" />
         <img
           src="/hero.png"
-          alt=""
-          aria-hidden="true"
+          alt="HaNeul - Produktet Premium Koreane"
           fetchPriority="high"
           loading="eager"
           decoding="sync"

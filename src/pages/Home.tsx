@@ -248,15 +248,17 @@ export default function Home() {
                     </div>
 
                     {/* Mobile layout */}
-                    <div className="md:hidden flex items-start gap-5 py-6 border-b border-white/5 last:border-0">
-                      <div className="flex flex-col items-center gap-2 pt-1">
-                        <div className="w-2 h-2 bg-red-600 rounded-full shrink-0" />
-                        <div className="w-px flex-1 bg-white/10" />
+                    <div className="md:hidden flex items-start gap-5 py-8 border-b border-white/5 last:border-0 group/mob">
+                      {/* Left: line + dot */}
+                      <div className="flex flex-col items-center shrink-0 self-stretch">
+                        <div className="w-2 h-2 bg-white/20 rounded-full border border-white/30 group-hover/mob:bg-red-600 group-hover/mob:border-red-600 group-hover/mob:scale-150 transition-all duration-500 mt-1" />
+                        <div className="w-px flex-1 bg-gradient-to-b from-white/15 to-transparent mt-2" />
                       </div>
-                      <div className="pb-2">
-                        <span className="font-serif text-3xl text-white/20 block leading-none mb-1">{item.id}</span>
-                        <h3 className="font-serif text-xl mb-1">{item.title}</h3>
-                        <p className="text-white/60 text-sm font-light">{item.desc}</p>
+                      {/* Right: content */}
+                      <div className="pb-2 opacity-50 group-hover/mob:opacity-100 transition-all duration-500">
+                        <span className="font-serif text-5xl text-white/20 block leading-none mb-2">{item.id}</span>
+                        <h3 className="font-serif text-2xl mb-2 group-hover/mob:text-red-400 transition-colors duration-500">{item.title}</h3>
+                        <p className="text-white/60 text-sm font-light leading-relaxed">{item.desc}</p>
                       </div>
                     </div>
                   </div>

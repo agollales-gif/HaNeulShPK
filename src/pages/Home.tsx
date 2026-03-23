@@ -205,27 +205,49 @@ export default function Home() {
           {/* Timeline — stacks on mobile */}
           <div className="relative">
             <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-white/10 -translate-x-1/2" />
-            <div className="space-y-10 sm:space-y-16 md:space-y-24">
-              {pastMarkets.map((item, index) => (
-                <div
-                  key={item.id}
-                  className={`relative flex items-start md:items-center gap-6 md:gap-0 md:justify-between w-full ${index % 2 === 0 ? 'md:flex-row-reverse' : 'md:flex-row'}`}
-                >
-                  {/* Dot — only on md+ */}
-                  <div className="hidden md:flex absolute left-1/2 w-8 h-8 bg-[#1a2b4b] border border-white/20 rounded-full -translate-x-1/2 z-10 items-center justify-center">
-                    <div className="w-1.5 h-1.5 bg-white/30 rounded-full" />
-                  </div>
-                  {/* Mobile dot */}
-                  <div className="md:hidden w-3 h-3 mt-1.5 bg-red-600 rounded-full shrink-0" />
+            <div className="space-y-10 sm:space-y-16 md:space-y-20">
+              {pastMarkets.map((item, index) => {
+                const isRight = index % 2 === 0; // even → text on right side
+                return (
+                  <div key={item.id} className="relative flex items-start md:items-center gap-6 md:gap-0 w-full">
+                    {/* Dot */}
+                    <div className="hidden md:flex absolute left-1/2 w-8 h-8 bg-[#1a2b4b] border border-white/20 rounded-full -translate-x-1/2 z-10 items-center justify-center">
+                      <div className="w-1.5 h-1.5 bg-white/30 rounded-full" />
+                    </div>
+                    {/* Mobile dot */}
+                    <div className="md:hidden w-3 h-3 mt-1.5 bg-red-600 rounded-full shrink-0" />
 
-                  <div className={`md:w-[42%] ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
-                    <span className="font-serif text-2xl sm:text-4xl block mb-1 text-white/30" aria-hidden="true">{item.id}</span>
-                    <h3 className="font-serif text-2xl sm:text-3xl mb-2">{item.title}</h3>
-                    <p className="text-white/70 text-sm sm:text-base font-light">{item.desc}</p>
+                    {/* Left half */}
+                    <div className={`hidden md:block w-1/2 pr-12 ${isRight ? 'invisible' : 'text-right'}`}>
+                      {!isRight && (
+                        <>
+                          <span className="font-serif text-4xl block mb-1 text-white/30" aria-hidden="true">{item.id}</span>
+                          <h3 className="font-serif text-3xl mb-2">{item.title}</h3>
+                          <p className="text-white/70 text-base font-light">{item.desc}</p>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Right half */}
+                    <div className={`hidden md:block w-1/2 pl-12 ${isRight ? 'text-left' : 'invisible'}`}>
+                      {isRight && (
+                        <>
+                          <span className="font-serif text-4xl block mb-1 text-white/30" aria-hidden="true">{item.id}</span>
+                          <h3 className="font-serif text-3xl mb-2">{item.title}</h3>
+                          <p className="text-white/70 text-base font-light">{item.desc}</p>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Mobile layout */}
+                    <div className="md:hidden">
+                      <span className="font-serif text-2xl block mb-1 text-white/30" aria-hidden="true">{item.id}</span>
+                      <h3 className="font-serif text-2xl mb-1">{item.title}</h3>
+                      <p className="text-white/70 text-sm font-light">{item.desc}</p>
+                    </div>
                   </div>
-                  <div className="hidden md:block md:w-[42%]" />
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

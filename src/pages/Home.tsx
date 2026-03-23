@@ -209,72 +209,36 @@ export default function Home() {
 
           {/* Timeline */}
           <div className="relative">
-            {/* Center line — desktop only */}
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent -translate-x-1/2" />
-            {/* Center line — mobile */}
-            <div className="md:hidden absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent -translate-x-1/2" />
+            {/* Center line — red, always visible */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-red-600/60 to-transparent -translate-x-1/2" />
 
             <div className="space-y-0">
               {pastMarkets.map((item, index) => {
                 const isRight = index % 2 === 0;
+
+                const CardContent = ({ align }: { align: 'left' | 'right' }) => (
+                  <div className={`py-8 opacity-50 group-hover:opacity-100 transition-all duration-500 ${align === 'right' ? 'text-right' : 'text-left'}`}>
+                    <span className="font-serif text-4xl sm:text-5xl text-red-600/40 block leading-none mb-2">{item.id}</span>
+                    <h3 className="font-serif text-xl sm:text-2xl md:text-3xl mb-2 group-hover:text-red-400 transition-colors duration-500">{item.title}</h3>
+                    <p className="text-white/60 text-xs sm:text-sm font-light leading-relaxed">{item.desc}</p>
+                  </div>
+                );
+
                 return (
-                  <div key={item.id} className="relative group">
-                    {/* Desktop layout */}
-                    <div className="hidden md:flex items-center min-h-[120px]">
-                      {/* Left half */}
-                      <div className="w-1/2 pr-16 flex justify-end">
-                        {!isRight && (
-                          <div className="text-right max-w-xs py-8 opacity-50 group-hover:opacity-100 transition-all duration-500">
-                            <span className="font-serif text-5xl text-white/20 block leading-none mb-2">{item.id}</span>
-                            <h3 className="font-serif text-2xl md:text-3xl mb-2 group-hover:text-red-400 transition-colors duration-500">{item.title}</h3>
-                            <p className="text-white/60 text-sm font-light leading-relaxed">{item.desc}</p>
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Center dot */}
-                      <div className="absolute left-1/2 -translate-x-1/2 z-10">
-                        <div className="w-3 h-3 bg-white/20 rounded-full border border-white/30 group-hover:bg-red-600 group-hover:border-red-600 group-hover:scale-150 transition-all duration-500" />
-                      </div>
-
-                      {/* Right half */}
-                      <div className="w-1/2 pl-16 flex justify-start">
-                        {isRight && (
-                          <div className="text-left max-w-xs py-8 opacity-50 group-hover:opacity-100 transition-all duration-500">
-                            <span className="font-serif text-5xl text-white/20 block leading-none mb-2">{item.id}</span>
-                            <h3 className="font-serif text-2xl md:text-3xl mb-2 group-hover:text-red-400 transition-colors duration-500">{item.title}</h3>
-                            <p className="text-white/60 text-sm font-light leading-relaxed">{item.desc}</p>
-                          </div>
-                        )}
-                      </div>
+                  <div key={item.id} className="relative group flex items-center min-h-[100px] sm:min-h-[120px]">
+                    {/* Left half */}
+                    <div className="w-1/2 pr-6 sm:pr-16 flex justify-end">
+                      {!isRight && <CardContent align="right" />}
                     </div>
 
-                    {/* Mobile layout — same as desktop: center line, text alternates left/right */}
-                    <div className="md:hidden flex items-center min-h-[100px]">
-                      {/* Left half */}
-                      <div className="w-1/2 pr-5 flex justify-end">
-                        {!isRight && (
-                          <div className="text-right opacity-50 group-hover/mob:opacity-100 transition-all duration-500 py-6">
-                            <span className="font-serif text-3xl text-white/20 block leading-none mb-1">{item.id}</span>
-                            <h3 className="font-serif text-lg mb-1 group-hover/mob:text-red-400 transition-colors duration-500">{item.title}</h3>
-                            <p className="text-white/60 text-xs font-light leading-relaxed">{item.desc}</p>
-                          </div>
-                        )}
-                      </div>
-                      {/* Center dot */}
-                      <div className="shrink-0 z-10">
-                        <div className="w-2 h-2 bg-white/20 rounded-full border border-white/30 group-hover/mob:bg-red-600 group-hover/mob:border-red-600 group-hover/mob:scale-150 transition-all duration-500" />
-                      </div>
-                      {/* Right half */}
-                      <div className="w-1/2 pl-5 flex justify-start">
-                        {isRight && (
-                          <div className="text-left opacity-50 group-hover/mob:opacity-100 transition-all duration-500 py-6">
-                            <span className="font-serif text-3xl text-white/20 block leading-none mb-1">{item.id}</span>
-                            <h3 className="font-serif text-lg mb-1 group-hover/mob:text-red-400 transition-colors duration-500">{item.title}</h3>
-                            <p className="text-white/60 text-xs font-light leading-relaxed">{item.desc}</p>
-                          </div>
-                        )}
-                      </div>
+                    {/* Center dot */}
+                    <div className="absolute left-1/2 -translate-x-1/2 z-10">
+                      <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-red-600/40 rounded-full border border-red-600 group-hover:bg-red-600 group-hover:scale-150 transition-all duration-500" />
+                    </div>
+
+                    {/* Right half */}
+                    <div className="w-1/2 pl-6 sm:pl-16 flex justify-start">
+                      {isRight && <CardContent align="left" />}
                     </div>
                   </div>
                 );

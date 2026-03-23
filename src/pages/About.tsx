@@ -82,7 +82,7 @@ export default function About() {
               </h1>
               <div className="flex flex-col items-start gap-6">
                 <div className="h-[1px] w-24 bg-[#1a2b4b]/40" />
-                <p className="font-sans text-sm md:text-base opacity-70 uppercase tracking-[0.2em] max-w-xl leading-relaxed">
+                <p className="font-sans text-sm md:text-base text-[#1a2b4b]/80 uppercase tracking-[0.2em] max-w-xl leading-relaxed">
                   Pika e parë dhe kryesore e shpërndarjes së autorizuar në Republikën e Shqipërisë.
                 </p>
               </div>
@@ -110,8 +110,8 @@ export default function About() {
           </div>
         </div>
 
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-40">
-          <span className="text-[9px] uppercase tracking-[0.4em]">Profil Strategjik</span>
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-70">
+          <span className="text-[9px] uppercase tracking-[0.4em] text-[#1a2b4b]">Profil Strategjik</span>
           <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }} className="w-[1px] h-16 bg-[#1a2b4b]" />
         </div>
       </section>
@@ -136,7 +136,7 @@ export default function About() {
                 <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl mb-6 tracking-tight group-hover:text-red-600 transition-colors duration-500 text-[#1a2b4b]">
                   {item.name}
                 </h2>
-                <p className="font-sans text-base md:text-lg lg:text-xl opacity-70 leading-relaxed max-w-xl">
+                <p className="font-sans text-base md:text-lg lg:text-xl text-[#1a2b4b]/80 leading-relaxed max-w-xl">
                   {item.desc}
                 </p>
               </div>
@@ -153,7 +153,7 @@ export default function About() {
               <h2 className="font-serif text-5xl md:text-7xl lg:text-8xl tracking-tighter mb-10 leading-none">
                 Lidership i <br /> <span className="text-red-600">Konfirmuar</span>.
               </h2>
-              <p className="text-xl md:text-2xl opacity-80 leading-relaxed font-light">
+              <p className="text-xl md:text-2xl text-[#fdfaf5]/90 leading-relaxed font-light">
                 HaNeul zë vendin qendror si distributori i parë që formalizoi partneritetin me Nongshim në Shqipëri. Si forca më e madhe shpërndarëse, ne integrojmë logjistikën e avancuar me integritetin e markës.
               </p>
             </motion.div>
@@ -166,7 +166,7 @@ export default function About() {
               ].map((item, i) => (
                 <motion.div key={i} className="border-l-2 border-red-600 pl-10">
                   <h3 className="font-serif text-2xl md:text-3xl mb-4">{item.title}</h3>
-                  <p className="opacity-70 text-base md:text-lg leading-relaxed">{item.desc}</p>
+                  <p className="text-[#fdfaf5]/80 text-base md:text-lg leading-relaxed">{item.desc}</p>
                 </motion.div>
               ))}
             </div>

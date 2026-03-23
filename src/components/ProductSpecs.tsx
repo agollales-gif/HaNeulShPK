@@ -18,13 +18,13 @@ export default function ProductSpecs({ tech, onOrderClick }: { tech: TechSpecs; 
               <div className="absolute -top-1 -right-2 w-2 h-2 bg-red-600 rounded-full animate-pulse" />
             </div>
             <div>
-              <h4 className="font-sans text-[10px] uppercase tracking-[0.4em] text-red-600 font-bold mb-1">Technical Blueprint</h4>
-              <p className="font-serif text-xs text-[#1a2b4b]/60 italic">Precision Engineering Details</p>
+              <p className="font-sans text-[10px] uppercase tracking-[0.4em] text-red-600 font-bold mb-1">Technical Blueprint</p>
+              <p className="font-serif text-xs text-[#1a2b4b]/80 italic">Precision Engineering Details</p>
             </div>
           </div>
           <div className="text-right">
-            <span className="font-serif text-2xl text-[#1a2b4b]/30">{Object.keys(tech).length}</span>
-            <p className="font-sans text-[8px] uppercase tracking-[0.3em] text-[#1a2b4b]/50">Specs</p>
+            <span className="font-serif text-2xl text-[#1a2b4b]/60">{Object.keys(tech).length}</span>
+            <p className="font-sans text-[8px] uppercase tracking-[0.3em] text-[#1a2b4b]/70">Specs</p>
           </div>
         </div>
 
@@ -46,7 +46,7 @@ export default function ProductSpecs({ tech, onOrderClick }: { tech: TechSpecs; 
 
         {/* Footer note */}
         <div className="mt-8 text-center">
-          <p className="font-serif text-xs text-[#1a2b4b]/50 italic">
+          <p className="font-serif text-xs text-[#1a2b4b]/70 italic">
             Premium quality specifications for professional standards
           </p>
         </div>

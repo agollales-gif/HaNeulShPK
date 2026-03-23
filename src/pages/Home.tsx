@@ -137,6 +137,7 @@ function HeroBackgroundVideo() {
       style={{ contain: 'layout style paint' }}
     >
       <picture>
+        <source srcSet="/hero.avif" type="image/avif" />
         <source srcSet="/hero.webp" type="image/webp" />
         <img
           src="/hero.png"
@@ -181,7 +182,7 @@ export default function Home() {
               <h1 className="font-serif text-5xl sm:text-6xl md:text-8xl lg:text-9xl leading-[0.8] tracking-tighter mb-6 sm:mb-8 animate-fade-in">
                 Eleganca e <br /> <span className="italic font-extralight text-red-600">traditës</span> koreane.
               </h1>
-              <p className="text-lg sm:text-xl opacity-70 mb-8 sm:mb-10 max-w-lg leading-relaxed font-light animate-fade-in">
+              <p className="text-lg sm:text-xl text-[#1a2b4b]/80 mb-8 sm:mb-10 max-w-lg leading-relaxed font-light animate-fade-in">
                 HaNeul - Qielli Juaj i Shijes. Eksploroni gamën tonë të produkteve premium.
               </p>
               <Link 
@@ -273,16 +274,16 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
             <div>
               <h2 className="font-serif text-4xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tighter mb-6 sm:mb-8 text-red-600">Lider Global.</h2>
-              <p className="text-base sm:text-lg md:text-xl opacity-80 font-light leading-relaxed">Ekskluzivitet i garantuar dhe cilësi e certifikuar për tregun shqiptar.</p>
+              <p className="text-base sm:text-lg md:text-xl text-[#1a2b4b]/80 font-light leading-relaxed">Ekskluzivitet i garantuar dhe cilësi e certifikuar për tregun shqiptar.</p>
             </div>
             <div className="grid grid-cols-2 gap-12">
                 <div>
                   <div className="font-serif text-8xl text-[#1a2b4b] mb-2">2.8B</div>
-                  <span className="text-[10px] uppercase tracking-[0.4em] text-[#1a2b4b]/80">Shitje Ndërkombëtare / Vit</span>
+                  <span className="text-[10px] uppercase tracking-[0.4em] text-[#1a2b4b]">Shitje Ndërkombëtare / Vit</span>
                 </div>
                 <div>
                   <div className="font-serif text-8xl text-red-600 mb-2"><Counter from={0} to={12} /></div>
-                  <span className="text-[10px] uppercase tracking-[0.4em] text-[#1a2b4b]/80">Muaj Afatzgjatësi</span>
+                  <span className="text-[10px] uppercase tracking-[0.4em] text-[#1a2b4b]">Muaj Afatzgjatësi</span>
                 </div>
             </div>
           </div>

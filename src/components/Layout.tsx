@@ -1,6 +1,6 @@
-import { ReactNode, useEffect, useState, useCallback, useMemo } from 'react';
+import { ReactNode, useEffect, useState, useCallback, useMemo, lazy, Suspense } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 import MagneticButton from './MagneticButton';
 
@@ -91,7 +91,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           <div className="hidden md:flex items-center space-x-12">
             {navLinks.map((link) => (
               <Link key={link.path} to={link.path} className="relative group overflow-hidden">
-                <span className="font-sans text-xs uppercase tracking-[0.2em] font-medium opacity-70 group-hover:opacity-100 transition-opacity">
+                <span className="font-sans text-xs uppercase tracking-[0.2em] font-medium text-[#1a2b4b] group-hover:opacity-100 transition-opacity">
                   {link.label}
                 </span>
                 <span
@@ -211,13 +211,13 @@ export default function Layout({ children }: { children: ReactNode }) {
                 하늘 <span className="text-red-600 italic font-light">HaNeul</span>
               </span>
             </div>
-            <p className="font-sans text-xs md:text-sm uppercase tracking-widest text-[#1a2b4b] opacity-70 mt-2 md:mt-4">
+            <p className="font-sans text-xs md:text-sm uppercase tracking-widest text-[#1a2b4b] mt-2 md:mt-4">
               Nga tasi në kafshatë, ne sjellim kënaqësi.
             </p>
           </div>
 
-          <div className="md:w-1/3 flex flex-col gap-3 md:gap-4 font-sans text-xs md:text-sm text-[#1a2b4b] opacity-70">
-            <h4 className="uppercase tracking-[0.2em] text-[#1a2b4b] opacity-70 mb-2 text-[10px] md:text-xs">Kontakti</h4>
+          <div className="md:w-1/3 flex flex-col gap-3 md:gap-4 font-sans text-xs md:text-sm text-[#1a2b4b]">
+            <p className="uppercase tracking-[0.2em] text-[#1a2b4b] opacity-70 mb-2 text-[10px] md:text-xs font-bold">Kontakti</p>
             <p>📍 Rruga e Dritës, Ndërtesa 4, Tiranë, Shqipëri</p>
             <p>📞 +44 7464 729114</p>
             <p>✉️ info@haneul.com</p>

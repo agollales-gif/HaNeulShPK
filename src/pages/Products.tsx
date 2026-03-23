@@ -98,9 +98,9 @@ function ProductCard({ product, index, key, onOrderClick }: { product: typeof pr
           </div>
           
           <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl tracking-tighter text-[#1a2b4b]">{product.name}</h2>
-          <h3 className="font-sans text-sm md:text-base uppercase tracking-widest opacity-60 italic">{product.subtitle}</h3>
+          <h3 className="font-sans text-sm md:text-base text-[#1a2b4b]/80 uppercase tracking-widest italic">{product.subtitle}</h3>
           
-          <p className="font-sans text-sm md:text-lg opacity-80 leading-relaxed">
+          <p className="font-sans text-sm md:text-lg text-[#1a2b4b]/80 leading-relaxed">
             {product.desc}
           </p>
 
@@ -181,8 +181,8 @@ export default function Products() {
           </div>
         </div>
 
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-60">
-          <span className="text-xs uppercase tracking-[0.4em] font-light">Produktet</span>
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-80">
+          <span className="text-xs uppercase tracking-[0.4em] font-light text-[#1a2b4b]">Produktet</span>
           <motion.div animate={{ y: [0, 12, 0] }} transition={{ duration: 2.5, repeat: Infinity }} className="w-[2px] h-20 bg-gradient-to-b from-[#1a2b4b] to-transparent" />
         </div>
       </section>

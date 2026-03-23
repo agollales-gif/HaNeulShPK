@@ -26,10 +26,10 @@ function inlineCriticalCssPlugin(): Plugin {
           ) {
             const css = (chunk as any).source as string;
             // Replace the <link rel="stylesheet"> with an inline <style>
-            result = result.replace(
-              new RegExp(`<link[^>]+href="[./]*${fileName.replace('.', '\\.')}[^"]*"[^>]*>`),
-              `<style>${css}</style>`
-            );
+            // Match any link tag referencing this CSS file (handles leading / or ./)
+            const escaped = fileName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const linkRegex = new RegExp(`<link[^>]+href=["'][./]*${escaped}["'][^>]*/?>`);
+            result = result.replace(linkRegex, `<style>${css}</style>`);
           }
           // Modulepreload the main JS entry chunk
           if (

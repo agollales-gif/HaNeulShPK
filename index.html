@@ -22,7 +22,7 @@
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&display=swap" /></noscript>
 
     <!-- Preload LCP image -->
-    <link rel="preload" href="/hero.webp" as="image" type="image/webp" fetchpriority="high" />
+    <link rel="preload" href="/hero.avif" as="image" type="image/avif" fetchpriority="high" />
     <link rel="preload" href="/HaNeul_logo_sm.webp" as="image" type="image/webp" fetchpriority="low" />
 
     <meta name="theme-color" content="#1a2b4b" />
@@ -33,6 +33,7 @@
          React will take over this element once it mounts. -->
     <div id="hero-shell" aria-hidden="true">
       <picture>
+        <source srcset="/hero.avif" type="image/avif" />
         <source srcset="/hero.webp" type="image/webp" />
         <img src="/hero.png" alt="" width="560" height="315" fetchpriority="high" decoding="sync" />
       </picture>

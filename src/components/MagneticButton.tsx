@@ -1,50 +1,49 @@
-import { motion } from 'motion/react';
 import React, { useRef, useState, ReactNode, useCallback } from 'react';
 
 interface Props {
   children: ReactNode;
   className?: string;
   onClick?: () => void;
-  key?: string | number;
 }
 
 export default function MagneticButton({ children, className = '', onClick }: Props) {
   const ref = useRef<HTMLButtonElement>(null);
   const rectRef = useRef<DOMRect | null>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [pos, setPos] = useState({ x: 0, y: 0 });
 
-  // Cache rect on enter — avoids getBoundingClientRect on every mousemove (forced reflow)
   const handleMouseEnter = useCallback(() => {
-    if (ref.current) {
-      rectRef.current = ref.current.getBoundingClientRect();
-    }
+    if (ref.current) rectRef.current = ref.current.getBoundingClientRect();
   }, []);
 
-  const handleMouse = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     const rect = rectRef.current;
     if (!rect) return;
-    const middleX = e.clientX - (rect.left + rect.width / 2);
-    const middleY = e.clientY - (rect.top + rect.height / 2);
-    setPosition({ x: middleX * 0.3, y: middleY * 0.3 });
+    setPos({
+      x: (e.clientX - (rect.left + rect.width / 2)) * 0.3,
+      y: (e.clientY - (rect.top + rect.height / 2)) * 0.3,
+    });
   }, []);
 
   const reset = useCallback(() => {
     rectRef.current = null;
-    setPosition({ x: 0, y: 0 });
+    setPos({ x: 0, y: 0 });
   }, []);
 
   return (
-    <motion.button
+    <button
       ref={ref}
       onMouseEnter={handleMouseEnter}
-      onMouseMove={handleMouse}
+      onMouseMove={handleMouseMove}
       onMouseLeave={reset}
       onClick={onClick}
-      animate={{ x: position.x, y: position.y }}
-      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
       className={className}
+      style={{
+        transform: `translate(${pos.x}px, ${pos.y}px)`,
+        transition: pos.x === 0 && pos.y === 0 ? 'transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94)' : 'transform 0.1s linear',
+        willChange: 'transform',
+      }}
     >
       {children}
-    </motion.button>
+    </button>
   );
 }

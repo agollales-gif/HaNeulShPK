@@ -175,7 +175,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                   href="https://www.instagram.com/haneulshpk" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-[10px] tracking-[0.3em] uppercase text-navy opacity-50 hover:opacity-100 hover:text-crimson transition-all"
+                  className="text-[10px] tracking-[0.3em] uppercase text-[#1a2b4b]/70 hover:text-crimson transition-all"
                 >
                   Instagram
                 </a>
@@ -230,7 +230,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               rel="noopener noreferrer"
             >
               <MagneticButton>
-                <span className="font-sans text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#1a2b4b] opacity-50 hover:opacity-100 hover:text-red-600 transition-all">
+                <span className="font-sans text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#1a2b4b]/70 hover:text-red-600 transition-all">
                   Instagram
                 </span>
               </MagneticButton>
@@ -240,8 +240,8 @@ export default function Layout({ children }: { children: ReactNode }) {
 
         <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-12 mt-12 md:mt-16 pt-6 md:pt-8 border-t border-navy/5">
           <div className="text-center">
-            <p className="font-sans text-[10px] md:text-xs uppercase tracking-widest text-[#1a2b4b] opacity-30">
-              © 2026 HaNeul Powered by <a href="https://www.blackbear-solutions.com/" target="_blank" rel="noopener noreferrer" className="hover:text-red-600 transition-colors">Black Bear Solutions</a>
+            <p className="font-sans text-[10px] md:text-xs uppercase tracking-widest text-[#1a2b4b]/60">
+              © 2026 HaNeul Powered by <a href="https://www.blackbear-solutions.com/" target="_blank" rel="noopener noreferrer" className="text-[#1a2b4b]/60 hover:text-red-600 transition-colors">Black Bear Solutions</a>
             </p>
           </div>
         </div>

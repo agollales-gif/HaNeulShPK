@@ -211,6 +211,8 @@ export default function Home() {
           <div className="relative">
             {/* Center line — desktop only */}
             <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent -translate-x-1/2" />
+            {/* Center line — mobile */}
+            <div className="md:hidden absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent -translate-x-1/2" />
 
             <div className="space-y-0">
               {pastMarkets.map((item, index) => {
@@ -247,18 +249,32 @@ export default function Home() {
                       </div>
                     </div>
 
-                    {/* Mobile layout */}
-                    <div className="md:hidden flex flex-col items-center py-8 border-b border-white/5 last:border-0 group/mob">
-                      {/* Dot */}
-                      <div className="w-2 h-2 bg-white/20 rounded-full border border-white/30 group-hover/mob:bg-red-600 group-hover/mob:border-red-600 group-hover/mob:scale-150 transition-all duration-500 mb-2" />
-                      {/* Content */}
-                      <div className="text-center opacity-50 group-hover/mob:opacity-100 transition-all duration-500 px-4">
-                        <span className="font-serif text-5xl text-white/20 block leading-none mb-2">{item.id}</span>
-                        <h3 className="font-serif text-2xl mb-2 group-hover/mob:text-red-400 transition-colors duration-500">{item.title}</h3>
-                        <p className="text-white/60 text-sm font-light leading-relaxed">{item.desc}</p>
+                    {/* Mobile layout — same as desktop: center line, text alternates left/right */}
+                    <div className="md:hidden flex items-center min-h-[100px]">
+                      {/* Left half */}
+                      <div className="w-1/2 pr-5 flex justify-end">
+                        {!isRight && (
+                          <div className="text-right opacity-50 group-hover/mob:opacity-100 transition-all duration-500 py-6">
+                            <span className="font-serif text-3xl text-white/20 block leading-none mb-1">{item.id}</span>
+                            <h3 className="font-serif text-lg mb-1 group-hover/mob:text-red-400 transition-colors duration-500">{item.title}</h3>
+                            <p className="text-white/60 text-xs font-light leading-relaxed">{item.desc}</p>
+                          </div>
+                        )}
                       </div>
-                      {/* Line below */}
-                      <div className="w-px h-10 bg-gradient-to-b from-white/15 to-transparent mt-4 last:hidden" />
+                      {/* Center dot */}
+                      <div className="shrink-0 z-10">
+                        <div className="w-2 h-2 bg-white/20 rounded-full border border-white/30 group-hover/mob:bg-red-600 group-hover/mob:border-red-600 group-hover/mob:scale-150 transition-all duration-500" />
+                      </div>
+                      {/* Right half */}
+                      <div className="w-1/2 pl-5 flex justify-start">
+                        {isRight && (
+                          <div className="text-left opacity-50 group-hover/mob:opacity-100 transition-all duration-500 py-6">
+                            <span className="font-serif text-3xl text-white/20 block leading-none mb-1">{item.id}</span>
+                            <h3 className="font-serif text-lg mb-1 group-hover/mob:text-red-400 transition-colors duration-500">{item.title}</h3>
+                            <p className="text-white/60 text-xs font-light leading-relaxed">{item.desc}</p>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 );

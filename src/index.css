@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+:root {
+  --color-crimson: #E21F26;
+  --color-navy: #1A2B56;
+  --color-ivory: #F8F9FA;
+  
+  --font-sans: 'Montserrat', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+}
+
+/* Critical performance optimizations */
+body {
+  background-color: var(--color-ivory);
+  color: var(--color-navy);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  /* Font loading optimization */
+  font-display: swap;
+}
+
+/* Optimize font rendering */
+* {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Fade-in animation for performance - optimized for compositor */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Reduce paint on scroll */
+.will-change-transform {
+  will-change: transform;
+}
+
+/* Optimize images and videos for better delivery */
+img, video {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  contain: layout style paint;
+  content-visibility: auto;
+}
+
+/* Image optimization for LCP and delivery */
+img {
+  max-width: 100%;
+  height: auto;
+  background-color: transparent;
+  object-fit: cover;
+  image-orientation: from-image;
+}
+
+/* Video optimization for delivery */
+video {
+  object-fit: cover;
+  object-position: center;
+}
+
+a, button, input, textarea {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ivory);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(26, 43, 86, 0.2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-crimson);
+}
+
+.glass-nav {
+  background: rgba(248, 249, 250, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px rgba(26, 43, 86, 0.2);
+  color: transparent;
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Content visibility optimization for sections */
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px;
+}
+
+/* Optimize large text rendering */
+h1, h2, h3 {
+  will-change: transform;
+  contain: layout style paint;
+}
+
+/* Prevent layout shifts */
+.lazy-load {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.lazy-load.loaded {
+  opacity: 1;
+}

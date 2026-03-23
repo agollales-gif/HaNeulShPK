@@ -197,7 +197,7 @@ export default function Home() {
           {/* Header */}
           <div className="text-center mb-20 sm:mb-32">
             <span className="text-red-600 font-bold tracking-[0.5em] uppercase text-xs sm:text-sm mb-5 block">Destinacioni i Ri</span>
-            <h2 className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] tracking-tighter leading-[0.9] mb-8">
+            <h2 className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] tracking-tighter leading-[0.9] mb-8 break-words">
               Tani në <span className="text-red-600 italic font-extralight">Shqipëri.</span>
             </h2>
             <div className="w-16 h-[1px] bg-red-600 mx-auto mb-8" />

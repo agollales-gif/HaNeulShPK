@@ -98,9 +98,9 @@ function ProductCard({ product, index, key, onOrderClick }: { product: typeof pr
           </div>
           
           <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl tracking-tighter text-[#1a2b4b]">{product.name}</h2>
-          <h3 className="font-sans text-sm md:text-base uppercase tracking-widest opacity-40 italic">{product.subtitle}</h3>
+          <h3 className="font-sans text-sm md:text-base uppercase tracking-widest opacity-60 italic">{product.subtitle}</h3>
           
-          <p className="font-sans text-sm md:text-lg opacity-70 leading-relaxed">
+          <p className="font-sans text-sm md:text-lg opacity-80 leading-relaxed">
             {product.desc}
           </p>
 
@@ -166,8 +166,12 @@ export default function Products() {
               <div className="relative">
                 <img 
                   src="/hero.png" 
-                  alt="Hero" 
+                  alt="Produktet HaNeul" 
                   className="relative w-full max-w-lg lg:max-w-xl h-auto object-contain drop-shadow-xl"
+                  fetchPriority="high"
+                  loading="eager"
+                  width="576"
+                  height="576"
                 />
               </div>
             </motion.div>

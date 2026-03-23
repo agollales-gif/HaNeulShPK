@@ -73,9 +73,9 @@ export default function About() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="text-left"
             >
-              <h4 className="text-red-600 font-sans font-bold tracking-[0.5em] uppercase text-[12px] mb-8">
+              <p className="text-red-600 font-sans font-bold tracking-[0.5em] uppercase text-[12px] mb-8">
                 Përfaqësia Zyrtare e Nongshim
-              </h4>
+              </p>
               <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tighter text-[#1a2b4b] mb-12">
                 Distributori <br /> 
                 <span className="text-red-600 italic font-extralight">më i madh në Shqipëri</span>
@@ -96,8 +96,12 @@ export default function About() {
             >
               <img 
                 src="/hero.png" 
-                alt="Hero" 
+                alt="HaNeul - Distributori Zyrtar Nongshim" 
                 className="w-full max-w-lg h-auto object-contain lg:max-w-xl"
+                fetchPriority="high"
+                loading="eager"
+                width="576"
+                height="576"
               />
             </motion.div>
           </div>
@@ -129,7 +133,7 @@ export default function About() {
                 <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl mb-6 tracking-tight group-hover:text-red-600 transition-colors duration-500 text-[#1a2b4b]">
                   {item.name}
                 </h2>
-                <p className="font-sans text-base md:text-lg lg:text-xl opacity-60 leading-relaxed max-w-xl">
+                <p className="font-sans text-base md:text-lg lg:text-xl opacity-70 leading-relaxed max-w-xl">
                   {item.desc}
                 </p>
               </div>
@@ -159,7 +163,7 @@ export default function About() {
               ].map((item, i) => (
                 <motion.div key={i} className="border-l-2 border-red-600 pl-10">
                   <h4 className="font-serif text-2xl md:text-3xl mb-4">{item.title}</h4>
-                  <p className="opacity-50 text-base md:text-lg leading-relaxed">{item.desc}</p>
+                  <p className="opacity-70 text-base md:text-lg leading-relaxed">{item.desc}</p>
                 </motion.div>
               ))}
             </div>

@@ -71,7 +71,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           {/* Logo */}
           <Link to="/" className="relative z-[120] flex items-center gap-3">
             <img 
-              src="/HaNeul_logo.png" 
+              src="/HaNeul_logo_sm.png" 
               alt="HaNeul Logo" 
               className="h-10 md:h-14 object-contain"
               loading="eager"
@@ -135,7 +135,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             {/* Logo dekorative në sfond */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none flex items-center justify-center">
               <img 
-                src="/HaNeul_logo.png" 
+                src="/HaNeul_logo_sm.png" 
                 alt="" 
                 className="w-4/5 object-contain"
                 loading="lazy"
@@ -191,7 +191,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           <div className="md:w-1/3">
             <div className="flex items-center gap-3 md:gap-4 mb-4">
               <img 
-                src="/HaNeul_logo(2).png" 
+                src="/HaNeul_logo_lg.png" 
                 alt="HaNeul Logo" 
                 className="h-10 md:h-16 lg:h-24 object-contain"
                 loading="lazy"

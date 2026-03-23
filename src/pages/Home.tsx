@@ -188,58 +188,81 @@ export default function Home() {
 
       {/* ── TANI NË SHQIPËRI ── */}
       <section className="relative py-24 sm:py-40 bg-[#1a2b4b] text-white z-10 overflow-hidden">
-        {/* Background glows */}
+        {/* Ambient glows */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/8 blur-[160px] rounded-full pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-red-600/5 blur-[140px] rounded-full pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8">
 
           {/* Header */}
           <div className="text-center mb-20 sm:mb-32">
-            <span className="text-red-600 font-bold tracking-[0.5em] uppercase text-xs sm:text-sm mb-4 block">Destinacioni i Ri</span>
-            <h2 className="font-serif text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] tracking-tighter leading-none mb-8">
-              Tani në <br /> <span className="text-red-600 italic">Shqipëri.</span>
+            <span className="text-red-600 font-bold tracking-[0.5em] uppercase text-xs sm:text-sm mb-5 block">Destinacioni i Ri</span>
+            <h2 className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] tracking-tighter leading-[0.9] mb-8">
+              Tani në <br /> <span className="text-red-600 italic font-extralight">Shqipëri.</span>
             </h2>
-            <div className="h-[1px] w-24 bg-red-600/40 mx-auto mb-8" />
+            <div className="w-16 h-[1px] bg-red-600 mx-auto mb-8" />
             <p className="max-w-lg mx-auto text-sm sm:text-base md:text-lg text-white/70 font-light leading-relaxed">
               Pas një suksesi të jashtëzakonshëm në tregjet botërore, HaNeul sjell zyrtarisht
               standardin më të lartë të produkteve koreane për konsumatorin shqiptar.
             </p>
           </div>
 
-          {/* Markets grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5">
-            {pastMarkets.map((item) => (
-              <div
-                key={item.id}
-                className="group relative bg-[#1a2b4b] p-8 sm:p-10 hover:bg-[#1e3260] transition-colors duration-500 overflow-hidden"
-              >
-                {/* Hover accent line */}
-                <div className="absolute top-0 left-0 w-0 h-[2px] bg-red-600 group-hover:w-full transition-all duration-500" />
+          {/* Timeline */}
+          <div className="relative">
+            {/* Center line */}
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent -translate-x-1/2" />
 
-                {/* Large number watermark */}
-                <span
-                  className="absolute -bottom-4 -right-2 font-serif text-[7rem] sm:text-[9rem] leading-none text-white/[0.04] group-hover:text-white/[0.07] transition-colors duration-500 select-none pointer-events-none"
-                  aria-hidden="true"
-                >
-                  {item.id}
-                </span>
+            <div className="space-y-0">
+              {pastMarkets.map((item, index) => {
+                const isRight = index % 2 === 0;
+                return (
+                  <div key={item.id} className="relative group">
+                    {/* Desktop layout */}
+                    <div className="hidden md:flex items-center min-h-[120px]">
+                      {/* Left half */}
+                      <div className="w-1/2 pr-16 flex justify-end">
+                        {!isRight && (
+                          <div className="text-right max-w-xs py-8 opacity-50 group-hover:opacity-100 transition-all duration-500">
+                            <span className="font-serif text-5xl text-white/20 block leading-none mb-2">{item.id}</span>
+                            <h3 className="font-serif text-2xl md:text-3xl mb-2 group-hover:text-red-400 transition-colors duration-500">{item.title}</h3>
+                            <p className="text-white/60 text-sm font-light leading-relaxed">{item.desc}</p>
+                          </div>
+                        )}
+                      </div>
 
-                {/* Content */}
-                <div className="relative z-10">
-                  <span className="font-sans text-[10px] uppercase tracking-[0.4em] text-red-600 font-bold mb-4 block">
-                    {item.id}
-                  </span>
-                  <h3 className="font-serif text-3xl sm:text-4xl tracking-tight mb-3 group-hover:text-red-400 transition-colors duration-300">
-                    {item.title}
-                  </h3>
-                  <div className="h-[1px] w-8 bg-red-600/40 mb-4 group-hover:w-16 transition-all duration-500" />
-                  <p className="text-white/60 text-sm font-light leading-relaxed group-hover:text-white/80 transition-colors duration-300">
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
+                      {/* Center dot */}
+                      <div className="absolute left-1/2 -translate-x-1/2 z-10">
+                        <div className="w-3 h-3 bg-white/20 rounded-full border border-white/30 group-hover:bg-red-600 group-hover:border-red-600 group-hover:scale-150 transition-all duration-500" />
+                      </div>
+
+                      {/* Right half */}
+                      <div className="w-1/2 pl-16 flex justify-start">
+                        {isRight && (
+                          <div className="text-left max-w-xs py-8 opacity-50 group-hover:opacity-100 transition-all duration-500">
+                            <span className="font-serif text-5xl text-white/20 block leading-none mb-2">{item.id}</span>
+                            <h3 className="font-serif text-2xl md:text-3xl mb-2 group-hover:text-red-400 transition-colors duration-500">{item.title}</h3>
+                            <p className="text-white/60 text-sm font-light leading-relaxed">{item.desc}</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Mobile layout */}
+                    <div className="md:hidden flex items-start gap-5 py-6 border-b border-white/5 last:border-0">
+                      <div className="flex flex-col items-center gap-2 pt-1">
+                        <div className="w-2 h-2 bg-red-600 rounded-full shrink-0" />
+                        <div className="w-px flex-1 bg-white/10" />
+                      </div>
+                      <div className="pb-2">
+                        <span className="font-serif text-3xl text-white/20 block leading-none mb-1">{item.id}</span>
+                        <h3 className="font-serif text-xl mb-1">{item.title}</h3>
+                        <p className="text-white/60 text-sm font-light">{item.desc}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>

@@ -188,67 +188,58 @@ export default function Home() {
 
       {/* ── TANI NË SHQIPËRI ── */}
       <section className="relative py-24 sm:py-40 bg-[#1a2b4b] text-white z-10 overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-red-600/10 blur-[120px] rounded-full pointer-events-none" />
+        {/* Background glows */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/8 blur-[160px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-red-600/5 blur-[140px] rounded-full pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
-          <div className="text-center mb-16 sm:mb-24">
+
+          {/* Header */}
+          <div className="text-center mb-20 sm:mb-32">
             <span className="text-red-600 font-bold tracking-[0.5em] uppercase text-xs sm:text-sm mb-4 block">Destinacioni i Ri</span>
-            <h2 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-[9rem] tracking-tighter leading-none mb-6">
+            <h2 className="font-serif text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] tracking-tighter leading-none mb-8">
               Tani në <br /> <span className="text-red-600 italic">Shqipëri.</span>
             </h2>
-            <p className="max-w-xl mx-auto text-sm sm:text-base md:text-lg text-white/80 font-light leading-relaxed">
+            <div className="h-[1px] w-24 bg-red-600/40 mx-auto mb-8" />
+            <p className="max-w-lg mx-auto text-sm sm:text-base md:text-lg text-white/70 font-light leading-relaxed">
               Pas një suksesi të jashtëzakonshëm në tregjet botërore, HaNeul sjell zyrtarisht
               standardin më të lartë të produkteve koreane për konsumatorin shqiptar.
             </p>
           </div>
 
-          {/* Timeline — stacks on mobile */}
-          <div className="relative">
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[1px] bg-white/10 -translate-x-1/2" />
-            <div className="space-y-10 sm:space-y-16 md:space-y-20">
-              {pastMarkets.map((item, index) => {
-                const isRight = index % 2 === 0; // even → text on right side
-                return (
-                  <div key={item.id} className="relative flex items-start md:items-center gap-6 md:gap-0 w-full">
-                    {/* Dot */}
-                    <div className="hidden md:flex absolute left-1/2 w-8 h-8 bg-[#1a2b4b] border border-white/20 rounded-full -translate-x-1/2 z-10 items-center justify-center">
-                      <div className="w-1.5 h-1.5 bg-white/30 rounded-full" />
-                    </div>
-                    {/* Mobile dot */}
-                    <div className="md:hidden w-3 h-3 mt-1.5 bg-red-600 rounded-full shrink-0" />
+          {/* Markets grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5">
+            {pastMarkets.map((item) => (
+              <div
+                key={item.id}
+                className="group relative bg-[#1a2b4b] p-8 sm:p-10 hover:bg-[#1e3260] transition-colors duration-500 overflow-hidden"
+              >
+                {/* Hover accent line */}
+                <div className="absolute top-0 left-0 w-0 h-[2px] bg-red-600 group-hover:w-full transition-all duration-500" />
 
-                    {/* Left half */}
-                    <div className={`hidden md:block w-1/2 pr-12 ${isRight ? 'invisible' : 'text-right'}`}>
-                      {!isRight && (
-                        <>
-                          <span className="font-serif text-4xl block mb-1 text-white/30" aria-hidden="true">{item.id}</span>
-                          <h3 className="font-serif text-3xl mb-2">{item.title}</h3>
-                          <p className="text-white/70 text-base font-light">{item.desc}</p>
-                        </>
-                      )}
-                    </div>
+                {/* Large number watermark */}
+                <span
+                  className="absolute -bottom-4 -right-2 font-serif text-[7rem] sm:text-[9rem] leading-none text-white/[0.04] group-hover:text-white/[0.07] transition-colors duration-500 select-none pointer-events-none"
+                  aria-hidden="true"
+                >
+                  {item.id}
+                </span>
 
-                    {/* Right half */}
-                    <div className={`hidden md:block w-1/2 pl-12 ${isRight ? 'text-left' : 'invisible'}`}>
-                      {isRight && (
-                        <>
-                          <span className="font-serif text-4xl block mb-1 text-white/30" aria-hidden="true">{item.id}</span>
-                          <h3 className="font-serif text-3xl mb-2">{item.title}</h3>
-                          <p className="text-white/70 text-base font-light">{item.desc}</p>
-                        </>
-                      )}
-                    </div>
-
-                    {/* Mobile layout */}
-                    <div className="md:hidden">
-                      <span className="font-serif text-2xl block mb-1 text-white/30" aria-hidden="true">{item.id}</span>
-                      <h3 className="font-serif text-2xl mb-1">{item.title}</h3>
-                      <p className="text-white/70 text-sm font-light">{item.desc}</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                {/* Content */}
+                <div className="relative z-10">
+                  <span className="font-sans text-[10px] uppercase tracking-[0.4em] text-red-600 font-bold mb-4 block">
+                    {item.id}
+                  </span>
+                  <h3 className="font-serif text-3xl sm:text-4xl tracking-tight mb-3 group-hover:text-red-400 transition-colors duration-300">
+                    {item.title}
+                  </h3>
+                  <div className="h-[1px] w-8 bg-red-600/40 mb-4 group-hover:w-16 transition-all duration-500" />
+                  <p className="text-white/60 text-sm font-light leading-relaxed group-hover:text-white/80 transition-colors duration-300">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

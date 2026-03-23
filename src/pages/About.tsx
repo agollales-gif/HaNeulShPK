@@ -165,7 +165,7 @@ export default function About() {
                 { title: "Standardi i Sigurisë", desc: "Certifikim dhe gjurmueshmëri e plotë për çdo produkt, duke garantuar origjinën." }
               ].map((item, i) => (
                 <motion.div key={i} className="border-l-2 border-red-600 pl-10">
-                  <h4 className="font-serif text-2xl md:text-3xl mb-4">{item.title}</h4>
+                  <h3 className="font-serif text-2xl md:text-3xl mb-4">{item.title}</h3>
                   <p className="opacity-70 text-base md:text-lg leading-relaxed">{item.desc}</p>
                 </motion.div>
               ))}

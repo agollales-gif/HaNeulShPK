@@ -127,67 +127,26 @@ function HomeProductCard({ product, index }: { product: any, index: number; key?
 }
 
 function HeroBackgroundVideo() {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    // Defer video loading to improve FCP and prevent forced reflow
-    const timer = setTimeout(() => {
-      if (videoRef.current) {
-        // Use requestAnimationFrame to prevent forced reflow
-        requestAnimationFrame(() => {
-          if (videoRef.current) {
-            videoRef.current.load();
-            setIsLoaded(true);
-          }
-        });
-      }
-    }, 2000); // Increased delay to prevent blocking
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
-    <>
-      {/* Static background: WebP with PNG fallback, fetchpriority=high for LCP */}
-      <div 
-        className="absolute inset-0 w-full h-full -z-10"
-        style={{ contain: 'layout style paint' }}
-      >
-        <picture>
-          <source srcSet="/hero.webp" type="image/webp" />
-          <img
-            src="/hero.png"
-            alt=""
-            aria-hidden="true"
-            fetchPriority="high"
-            loading="eager"
-            decoding="sync"
-            className="w-full h-full object-cover"
-            width="800"
-            height="600"
-          />
-        </picture>
-      </div>
-      {/* Video loads after 2s, fades in over the static image */}
-      <video 
-        ref={videoRef}
-        src="/hero_video.mp4" 
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="none"
-        aria-hidden="true"
-        className={`absolute inset-0 w-full h-full object-cover -z-10 transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-        style={{ 
-          willChange: 'opacity',
-          contain: 'layout style paint',
-        }}
-      >
-        <track kind="captions" srcLang="sq" label="Shqip" default />
-      </video>
-    </>
+    <div 
+      className="absolute inset-0 w-full h-full -z-10"
+      style={{ contain: 'layout style paint' }}
+    >
+      <picture>
+        <source srcSet="/hero.webp" type="image/webp" />
+        <img
+          src="/hero.png"
+          alt=""
+          aria-hidden="true"
+          fetchPriority="high"
+          loading="eager"
+          decoding="sync"
+          className="w-full h-full object-cover"
+          width="560"
+          height="315"
+        />
+      </picture>
+    </div>
   );
 }
 
@@ -267,7 +226,7 @@ export default function Home() {
                 >
                   <div className="w-full md:w-[42%] pl-12 md:pl-0 pr-0 md:pr-0 opacity-60 hover:opacity-100 transition-opacity duration-500">
                     <div className={index % 2 === 0 ? "text-right" : "text-left"}>
-                      <span className="font-serif text-4xl block mb-2 text-white/20">{item.id}</span>
+                      <span className="font-serif text-4xl block mb-2 text-white/40" aria-hidden="true">{item.id}</span>
                       <h3 className="font-serif text-3xl mb-3">{item.title}</h3>
                       <p className="text-white/70 text-base font-light">{item.desc}</p>
                     </div>

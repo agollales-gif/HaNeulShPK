@@ -12,7 +12,7 @@ const products = [
     subtitle: 'Pikante Gourmet',
     desc: 'Supa ikonike pikante me petë që nisi gjithçka. Një lëng i pasur që mishëron mjeshtërinë e shijes koreane.',
     cert: 'Vegan / Halal',
-    images: ['/shin_ramuyn/shin_ramuyn.png', '/shin_ramuyn/shin_ramuyn(2).jpeg', '/shin_ramuyn/shin_ramuyn(3).jpeg'],
+    images: ['/shin_ramuyn/shin_ramuyn(2).jpeg', '/shin_ramuyn/shin_ramuyn(3).jpeg'],
     tech: {
       'Category': 'Packet Noodles',
       'Type': 'Soup',
@@ -28,7 +28,7 @@ const products = [
     subtitle: 'Premium Pikante & Kremoze',
     desc: 'Fuzion i guximshëm i kremit dhe djegësisë. Një eksperiencë stir-fry për ata që kërkojnë teksturë kadifeje.',
     cert: 'Vegan / Halal',
-    images: ['/Shin_Ramun_tomba/Shin_Ramun_tomba.png', '/Shin_Ramun_tomba/Shin_Ramun_tomba.jpeg', '/Shin_Ramun_tomba/Shin_Ramun_tomba(2).jpeg'],
+    images: ['/Shin_Ramun_tomba/Shin_Ramun_tomba.jpeg', '/Shin_Ramun_tomba/Shin_Ramun_tomba(2).jpeg'],
     tech: {
       'Category': 'Packet Noodles',
       'Type': 'Stir Fry',
@@ -44,7 +44,7 @@ const products = [
     subtitle: 'Shije Oqeani dhe Pikante',
     desc: 'Snack-u legjendar me karkaleca të vërtetë. Krokante, e lehtë dhe e krijuar për të qenë e parezistueshme.',
     cert: 'Premium Snack',
-    images: ['/Sgin_Crackers/Sgin_Crackers.png', '/Sgin_Crackers/Sgin_Crackers(2).jpeg', '/Sgin_Crackers/Sgin_Crackers(3).png'],
+    images: ['/Sgin_Crackers/shin_crackers.png', '/Sgin_Crackers/shin_crackers 2.png'],
     tech: {
       'Category': 'Snack',
       'Type': 'Crackers',
@@ -96,14 +96,14 @@ export default function ProductDetail() {
       {/* Product Detail Section */}
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <motion.div 
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col md:flex-row items-center gap-8 md:gap-24 py-12 md:py-20"
         >
           {/* Product Images */}
-          <div className="w-full md:w-1/2 aspect-square bg-white flex items-center justify-center p-6 md:p-12 shadow-[0_30px_60px_-15px_rgba(26,43,75,0.1)] rounded-sm">
-            <div className="absolute top-4 md:top-8 right-4 md:right-8 text-[#1a2b4b]/5 font-serif text-[6rem] md:text-[10rem] pointer-events-none">
+          <div className="relative w-full lg:w-1/2 max-w-md aspect-[4/5] bg-white p-6 md:p-8 shadow-[0_30px_60px_-15px_rgba(26,43,75,0.1)] rounded-sm overflow-hidden">
+            <div className="absolute top-4 right-4 text-[#1a2b4b]/5 font-serif text-4xl md:text-6xl pointer-events-none">
               辛
             </div>
             <ProductSlideshow 

@@ -1,5 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, useInView } from 'framer-motion';
+import ProductSlideshow from '../components/ProductSlideshow';
 
 function Counter({ from, to }: { from: number; to: number }) {
   const [count, setCount] = useState(from);
@@ -33,45 +35,33 @@ function Counter({ from, to }: { from: number; to: number }) {
 
 function HomeProductCard({ product, index }: { product: { name: string; detail: string; image: string; id: string }; index: number; key?: string }) {
   const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setHasAnimated(true); observer.disconnect(); } },
-      { rootMargin: '-5%' }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+    if (isInView && !hasAnimated) {
+      setHasAnimated(true);
+    }
+  }, [isInView, hasAnimated]);
 
   return (
-    <div
+    <motion.div
       ref={ref}
-      className={`flex items-center gap-4 sm:gap-6 md:gap-10 py-10 md:py-16 border-b border-[#1a2b4b]/5 last:border-0 transition-all duration-500 ${hasAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-      style={{ transitionDelay: `${index * 100}ms` }}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={hasAnimated ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: index * 0.15 }}
+      className="flex items-center gap-4 sm:gap-6 md:gap-10 py-10 md:py-16 border-b border-[#1a2b4b]/5 last:border-0"
     >
       {/* Image */}
       <div className="w-2/5 sm:w-1/3 lg:w-1/2 flex justify-center shrink-0">
-        <div className="relative w-full aspect-[4/5] flex items-center justify-center">
-          <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-white to-red-50 rounded-lg" />
-          <div className="absolute inset-0 border-2 border-red-600/20 rounded-lg" />
-          <div className="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-red-600 rounded-tl-lg" />
-          <div className="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-red-600 rounded-tr-lg" />
-          <div className="absolute bottom-0 left-0 w-5 h-5 border-b-2 border-l-2 border-red-600 rounded-bl-lg" />
-          <div className="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-red-600 rounded-br-lg" />
-          <div className="relative w-full h-full flex items-center justify-center p-3">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="h-full object-contain rounded shadow-[0_10px_30px_rgba(26,43,75,0.12)] bg-white/50"
-              loading="lazy"
-              decoding="async"
-              width="200"
-              height="250"
-            />
+        <div className="relative w-full max-w-md aspect-[4/5] bg-white p-6 md:p-8 shadow-[0_30px_60px_-15px_rgba(26,43,75,0.1)] rounded-sm overflow-hidden">
+          <div className="absolute top-4 right-4 text-[#1a2b4b]/5 font-serif text-4xl md:text-6xl pointer-events-none">
+            辛
           </div>
+          <ProductSlideshow 
+            images={[product.image]} 
+            productName={product.name}
+          />
         </div>
       </div>
 
@@ -94,7 +84,7 @@ function HomeProductCard({ product, index }: { product: { name: string; detail: 
           Shiko Detajet
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -263,7 +253,7 @@ export default function Home() {
             {[
               { name: "Shin Ramyun Original", detail: "Supa ikonike pikante", image: "/shin_ramuyn/shin_ramuyn(2).jpeg", id: "shin-ramyun" },
               { name: "Shin Ramyun Toomba", detail: "Kremoze & Stir-fry", image: "/Shin_Ramun_tomba/Shin_Ramun_tomba.jpeg", id: "shin-toomba" },
-              { name: "Shrimp Crackers", detail: "Shije Oqeani & Pikante", image: "/Sgin_Crackers/Sgin_Crackers.jpeg", id: "shrimp-crackers" }
+              { name: "Shrimp Crackers", detail: "Shije Oqeani & Pikante", image: "/Sgin_Crackers/shin_crackers.png", id: "shrimp-crackers" }
             ].map((item, i) => (
               <HomeProductCard product={item} index={i} key={item.id} />
             ))}

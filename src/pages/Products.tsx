@@ -43,7 +43,7 @@ const products = [
     subtitle: 'Shije Oqeani dhe Pikante',
     desc: 'Snack-u legjendar me karkaleca të vërtetë. Krokante, e lehtë dhe e krijuar për të qenë e parezistueshme.',
     cert: 'Premium Snack',
-    images: ['/Sgin_Crackers/Sgin_Crackers.jpeg', '/Sgin_Crackers/resized_Sgin_Crackers(3).png'],
+    images: ['/Sgin_Crackers/shin_crackers.png', '/Sgin_Crackers/shin_crackers 2.png'],
     tech: {
       'Category': 'Snack',
       'Type': 'Crackers',
@@ -76,7 +76,7 @@ function ProductCard({ product, index, key, onOrderClick }: { product: typeof pr
     >
       {/* Product Image - Portrait Aspect Ratio */}
       <div className="w-full lg:w-1/2 flex justify-center">
-        <div className="relative w-full max-w-md aspect-[4/5] bg-white flex items-center justify-center p-6 md:p-8 shadow-[0_30px_60px_-15px_rgba(26,43,75,0.1)] rounded-sm overflow-hidden">
+        <div className="relative w-full max-w-md aspect-[4/5] bg-white p-6 md:p-8 shadow-[0_30px_60px_-15px_rgba(26,43,75,0.1)] rounded-sm overflow-hidden">
           <div className="absolute top-4 right-4 text-[#1a2b4b]/5 font-serif text-4xl md:text-6xl pointer-events-none">
             辛
           </div>

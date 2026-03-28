@@ -148,7 +148,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       </main>
 
       {/* FOOTER */}
-      <footer className="bg-white text-[#1a2b4b] py-8 md:py-12 border-t border-[#1a2b4b]/5 mt-auto">
+      <footer className="relative z-10 bg-white text-[#1a2b4b] py-8 md:py-12 border-t border-[#1a2b4b]/5 mt-auto">
         <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-12 flex flex-col md:flex-row justify-between items-start gap-8 md:gap-12">
           <div className="md:w-1/3">
             <div className="flex items-center gap-3 md:gap-4 mb-4">

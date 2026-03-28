@@ -76,8 +76,8 @@ function ProductCard({ product, index, key, onOrderClick }: { product: typeof pr
     >
       {/* Product Image - Portrait Aspect Ratio */}
       <div className="w-full lg:w-1/2 flex justify-center">
-        <div className="relative w-full max-w-md aspect-[4/5] bg-white p-6 md:p-8 shadow-[0_30px_60px_-15px_rgba(26,43,75,0.1)] rounded-sm overflow-hidden">
-          <div className="absolute top-4 right-4 text-[#1a2b4b]/5 font-serif text-4xl md:text-6xl pointer-events-none">
+        <div className="relative w-full max-w-md aspect-[4/5] bg-white p-4 sm:p-6 md:p-8 shadow-[0_30px_60px_-15px_rgba(26,43,75,0.1)] rounded-sm overflow-hidden">
+          <div className="absolute top-2 sm:top-4 right-2 sm:right-4 text-[#1a2b4b]/5 font-serif text-2xl sm:text-3xl md:text-4xl lg:text-6xl pointer-events-none">
             辛
           </div>
           <ProductSlideshow 
@@ -126,32 +126,32 @@ export default function Products() {
     <div className="relative bg-[#fdfaf5] text-[#1a2b4b] min-h-screen">
       
       {/* Hero Section - Clean Style */}
-      <section className="relative min-h-[80vh] flex items-center justify-center px-6 overflow-hidden bg-[#fdfaf5]">
+      <section className="relative min-h-[70vh] sm:min-h-[80vh] flex items-center justify-center px-4 sm:px-6 overflow-hidden bg-[#fdfaf5]">
         <div className="relative z-10 max-w-7xl w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="text-left space-y-8 relative z-20 pl-2 lg:pl-0"
+              className="text-left space-y-6 sm:space-y-8 relative z-20 pl-2 lg:pl-0"
             >
-              <div className="inline-flex items-center gap-4">
-                <div className="h-[2px] w-16 bg-red-600" />
-                <span className="text-red-600 font-sans font-bold tracking-[0.3em] uppercase text-sm">
+              <div className="inline-flex items-center gap-3 sm:gap-4">
+                <div className="h-[2px] w-12 sm:w-16 bg-red-600" />
+                <span className="text-red-600 font-sans font-bold tracking-[0.3em] uppercase text-xs sm:text-sm">
                   Koleksioni Zyrtar
                 </span>
               </div>
               
-              <div className="space-y-4">
-                <h1 className="font-serif text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] leading-none tracking-tighter text-[#1a2b4b]">
-                  <span className="pr-4">Koleksioni</span> <br /> 
-                  <span className="text-red-600 italic font-extralight pr-4 md:pr-8">Premium</span>
+              <div className="space-y-3 sm:space-y-4">
+                <h1 className="font-serif text-5xl sm:text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] leading-none tracking-tighter text-[#1a2b4b]">
+                  <span className="pr-2 sm:pr-4">Koleksioni</span> <br /> 
+                  <span className="text-red-600 italic font-extralight pr-2 sm:pr-4 md:pr-8">Premium</span>
                 </h1>
               </div>
               
-              <div className="space-y-6 max-w-lg">
-                <div className="h-[1px] w-32 bg-gradient-to-r from-[#1a2b4b] to-transparent" />
-                <p className="font-sans text-xl md:text-2xl opacity-80 leading-relaxed font-light">
+              <div className="space-y-4 sm:space-y-6 max-w-lg">
+                <div className="h-[1px] w-24 sm:w-32 bg-gradient-to-r from-[#1a2b4b] to-transparent" />
+                <p className="font-sans text-lg sm:text-xl md:text-2xl opacity-80 leading-relaxed font-light">
                   Përsosmëri në çdo paketim - shijet e mira të Kores së bashku me cilësinë e papërkrueshme.
                 </p>
               </div>
@@ -161,7 +161,7 @@ export default function Products() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-              className="flex justify-center lg:justify-end relative"
+              className="flex justify-center lg:justify-end relative mt-8 lg:mt-0"
             >
               <div className="relative">
               <picture>
@@ -169,7 +169,7 @@ export default function Products() {
                 <img 
                   src="/hero.png" 
                   alt="Produktet HaNeul" 
-                  className="relative w-full max-w-lg lg:max-w-xl h-auto object-contain drop-shadow-xl"
+                  className="relative w-full max-w-sm sm:max-w-md lg:max-w-xl h-auto object-contain drop-shadow-xl"
                   fetchPriority="high"
                   loading="eager"
                   width="576"
@@ -181,9 +181,9 @@ export default function Products() {
           </div>
         </div>
 
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-80">
+        <div className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 sm:gap-4 opacity-80">
           <span className="text-xs uppercase tracking-[0.4em] font-light text-[#1a2b4b]">Produktet</span>
-          <motion.div animate={{ y: [0, 12, 0] }} transition={{ duration: 2.5, repeat: Infinity }} className="w-[2px] h-20 bg-gradient-to-b from-[#1a2b4b] to-transparent" />
+          <motion.div animate={{ y: [0, 12, 0] }} transition={{ duration: 2.5, repeat: Infinity }} className="w-[2px] h-16 sm:h-20 bg-gradient-to-b from-[#1a2b4b] to-transparent" />
         </div>
       </section>
 

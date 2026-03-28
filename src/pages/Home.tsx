@@ -49,50 +49,47 @@ function HomeProductCard({ product, index }: { product: { name: string; detail: 
   return (
     <div
       ref={ref}
-      className={`flex items-center gap-4 sm:gap-6 md:gap-10 py-10 md:py-16 border-b border-[#1a2b4b]/5 last:border-0 transition-all duration-500 ${hasAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+      className={`flex flex-col lg:flex-row items-center gap-10 py-16 md:py-24 border-b border-[#1a2b4b]/5 last:border-0 transition-all duration-500 ${hasAnimated ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      {/* Image */}
-      <div className="w-2/5 sm:w-1/3 lg:w-1/2 flex justify-center shrink-0">
-        <div className="relative w-full aspect-[4/5] flex items-center justify-center">
-          <div className="absolute inset-0 bg-gradient-to-br from-red-50 via-white to-red-50 rounded-lg" />
-          <div className="absolute inset-0 border-2 border-red-600/20 rounded-lg" />
-          <div className="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-red-600 rounded-tl-lg" />
-          <div className="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-red-600 rounded-tr-lg" />
-          <div className="absolute bottom-0 left-0 w-5 h-5 border-b-2 border-l-2 border-red-600 rounded-bl-lg" />
-          <div className="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-red-600 rounded-br-lg" />
-          <div className="relative w-full h-full flex items-center justify-center p-3">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="h-full object-contain rounded shadow-[0_10px_30px_rgba(26,43,75,0.12)] bg-white/50"
-              loading="lazy"
-              decoding="async"
-              width="200"
-              height="250"
-            />
+      {/* Product Image - Portrait Aspect Ratio */}
+      <div className="w-full lg:w-1/2 flex justify-center">
+        <div className="relative w-full max-w-md aspect-[4/5] bg-white flex items-center justify-center p-6 md:p-8 shadow-[0_30px_60px_-15px_rgba(26,43,75,0.1)] rounded-sm overflow-hidden">
+          <div className="absolute top-4 right-4 text-[#1a2b4b]/5 font-serif text-4xl md:text-6xl pointer-events-none">
+            辛
           </div>
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-contain"
+            loading="lazy"
+            decoding="async"
+            width="200"
+            height="250"
+          />
         </div>
       </div>
 
-      {/* Text */}
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 md:gap-3 mb-3">
-          <span className="h-[1px] w-5 md:w-8 bg-red-600 shrink-0" />
-          <span className="font-sans text-[9px] md:text-xs uppercase tracking-[0.25em] text-red-600 font-bold truncate">
-            {product.detail}
-          </span>
+      {/* Product Content - Vertically Centered */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center">
+        <div className="space-y-6 md:space-y-8 max-w-lg">
+          <div className="flex items-center gap-3 md:gap-4">
+            <span className="h-[1px] w-8 md:w-12 bg-red-600" />
+            <span className="font-sans text-[10px] md:text-xs uppercase tracking-[0.3em] text-red-600 font-bold">
+              {product.detail}
+            </span>
+          </div>
+          
+          <h3 className="font-serif text-3xl md:text-5xl lg:text-6xl tracking-tighter text-[#1a2b4b] leading-tight">{product.name}</h3>
+          
+          <Link
+            to={`/products/${product.id}`}
+            aria-label={`Shiko Detajet - ${product.name}`}
+            className="inline-block border-b-2 border-red-600 pb-1 font-bold uppercase tracking-[0.25em] text-[9px] md:text-xs hover:text-red-600 transition-colors"
+          >
+            Shiko Detajet
+          </Link>
         </div>
-        <h3 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-5xl tracking-tighter text-[#1a2b4b] leading-tight mb-4 md:mb-6">
-          {product.name}
-        </h3>
-        <Link
-          to={`/products/${product.id}`}
-          aria-label={`Shiko Detajet - ${product.name}`}
-          className="inline-block border-b-2 border-red-600 pb-1 font-bold uppercase tracking-[0.25em] text-[9px] md:text-xs hover:text-red-600 transition-colors"
-        >
-          Shiko Detajet
-        </Link>
       </div>
     </div>
   );

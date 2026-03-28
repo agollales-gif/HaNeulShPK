@@ -133,7 +133,7 @@ export default function Products() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="text-left space-y-8"
+              className="text-left space-y-8 relative z-20 pl-2 lg:pl-0"
             >
               <div className="inline-flex items-center gap-4">
                 <div className="h-[2px] w-16 bg-red-600" />
@@ -144,8 +144,8 @@ export default function Products() {
               
               <div className="space-y-4">
                 <h1 className="font-serif text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] leading-none tracking-tighter text-[#1a2b4b]">
-                  Koleksioni <br /> 
-                  <span className="text-red-600 italic font-extralight">Premium</span>
+                  <span className="pr-4">Koleksioni</span> <br /> 
+                  <span className="text-red-600 italic font-extralight pr-4 md:pr-8">Premium</span>
                 </h1>
               </div>
               

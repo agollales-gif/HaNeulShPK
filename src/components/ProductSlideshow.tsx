@@ -55,7 +55,9 @@ const ProductSlideshow: React.FC<ProductSlideshowProps> = ({ images, productName
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="absolute inset-0 w-full h-full object-cover"
+            className={`absolute inset-0 w-full h-full object-cover ${
+              images[0]?.includes('shin_crackers') ? 'origin-top scale-[1.12]' : ''
+            }`}
             width={1080}
             height={1350}
           />

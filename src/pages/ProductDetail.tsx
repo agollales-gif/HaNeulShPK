@@ -102,16 +102,14 @@ export default function ProductDetail() {
           className="flex flex-col md:flex-row items-center gap-8 md:gap-24 py-12 md:py-20"
         >
           {/* Product Images */}
-          <div className="w-full md:w-1/2 flex justify-center">
-            <div className="relative w-full max-w-md aspect-[4/5] bg-white flex items-center justify-center p-6 md:p-8 shadow-[0_30px_60px_-15px_rgba(26,43,75,0.1)] rounded-sm overflow-hidden">
-              <div className="absolute top-4 right-4 text-[#1a2b4b]/5 font-serif text-4xl md:text-6xl pointer-events-none">
-                辛
-              </div>
-              <ProductSlideshow 
-                images={product.images} 
-                productName={product.name}
-              />
+          <div className="w-full md:w-1/2 aspect-square bg-white flex items-center justify-center p-6 md:p-12 shadow-[0_30px_60px_-15px_rgba(26,43,75,0.1)] rounded-sm">
+            <div className="absolute top-4 md:top-8 right-4 md:right-8 text-[#1a2b4b]/5 font-serif text-[6rem] md:text-[10rem] pointer-events-none">
+              辛
             </div>
+            <ProductSlideshow 
+              images={product.images} 
+              productName={product.name}
+            />
           </div>
 
           {/* Product Content */}

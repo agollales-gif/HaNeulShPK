@@ -55,7 +55,7 @@ const ProductSlideshow: React.FC<ProductSlideshowProps> = ({ images, productName
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="h-full object-contain rounded shadow-[0_20px_40px_rgba(26,43,75,0.15)] border border-red-600/10 bg-white/50"
+            className="w-full h-full object-cover rounded shadow-[0_20px_40px_rgba(26,43,75,0.15)] border border-red-600/10 bg-white/50"
           />
         </AnimatePresence>
       </div>

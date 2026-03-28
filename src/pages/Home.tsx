@@ -54,7 +54,7 @@ function HomeProductCard({ product, index }: { product: { name: string; detail: 
     >
       {/* Image */}
       <div className="w-2/5 sm:w-1/3 lg:w-1/2 flex justify-center shrink-0">
-        <div className="relative w-full max-w-md aspect-[4/5] bg-white p-6 md:p-8 shadow-[0_30px_60px_-15px_rgba(26,43,75,0.1)] rounded-sm overflow-hidden">
+        <div className="relative w-full max-w-md aspect-[4/5] bg-transparent p-6 md:p-8 rounded-sm overflow-hidden">
           <div className="absolute top-4 right-4 text-[#1a2b4b]/5 font-serif text-4xl md:text-6xl pointer-events-none">
             辛
           </div>
